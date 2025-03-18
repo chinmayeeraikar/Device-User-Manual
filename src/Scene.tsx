@@ -4,7 +4,7 @@ import { Mesh } from 'three';
 import { useGLTF } from '@react-three/drei';
 
 const Model = () => {
-  const { scene } = useGLTF('.gltf');
+  const { scene } = useGLTF('../assets/Camera.glb');
   return <primitive object={scene} />;
 };
 

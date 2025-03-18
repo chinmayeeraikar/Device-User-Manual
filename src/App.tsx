@@ -13,8 +13,8 @@ const App = () => {
         {/* <SheetPopUp /> */}
         <SidebarTrigger className="-ml-1" />
       </SidebarProvider>
-      <Scene />
       <NavbarRoutes />
+      <Scene />
     </div>
   );
 };
