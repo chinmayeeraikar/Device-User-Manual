@@ -12,7 +12,9 @@
     "vite": "^6.0.5"
   },
   "dependencies": {
+    "@react-three/drei": "^10.0.4",
     "@react-three/fiber": "^9.1.0",
+    "@types/three": "^0.174.0",
     "gsap": "^3.12.7",
     "three": "^0.174.0"
   }

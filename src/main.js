@@ -1,3 +1,4 @@
+import React, { useRef, useEffect } from 'react';
 import * as three from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
@@ -112,9 +113,16 @@ function MouseClick( event ) {
     // calculate objects intersecting the picking ray
     const intersects = raycaster.intersectObjects( object.children );
 
-    if(intersects[0].morphTargetInfluences){
-        intersects[0].morphTargetInfluences[0] = 1;
+    //console.log(intersects[0].object.name)
+    const obj = intersects[0].object
+    if(obj!=object.children[0] && obj!=object.children[1] && obj !=object.children[2]){
+        if(obj.morphTargetInfluences){
+            intersects[0].object.morphTargetInfluences[0] = 1;
+            console.log(intersects[0].object.name, 'Pressed')
+            //intersects[0].object.morphTargetInfluences[0] = 0;
+        }
     }
+    //else if()
 
     // for ( let i = 0; i < intersects.length; i ++ ) {
     //     console.log('Button Pressed')
