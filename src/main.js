@@ -1,6 +1,7 @@
 import * as three from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
+import { objectWorldMatrix } from 'three/tsl';
 //import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 
 const scene = new three.Scene()
@@ -18,10 +19,10 @@ let options = {morph:0}
 
 const loader = new GLTFLoader()
 loader.load(
-    './assets/Camera.glb', function(gltf){
+    './assets/CameraBkdTex.glb', function(gltf){
         object = gltf.scene
         scene.add(object)
-        console.log(gltf.scene)
+        console.log(object)
         if (object.children.length > 0) {
             object.traverse((child) => {
                 if (child.morphTargetInfluences) {
@@ -67,8 +68,6 @@ const maxPixelRatio = Math.min(window.devicePixelRatio, 2)
 renderer.setPixelRatio(maxPixelRatio)
 renderer.setAnimationLoop( animate )
 
-console.log(window.devicePixelRatio)
-
 if(objectTorender == 'Camera'){
     controls = new OrbitControls (cam, renderer.domElement)
 }
@@ -77,22 +76,55 @@ let time = 0
 
 function animate(){
     time += 0.01
-    //cube.rotation.x += 0.01;
-    //cube.rotation.y += 0.01;
     if(object && objectTorender == 'Camera'){
         object.rotation.y = -1.5 + 3.1415/2 + mouseX / window.innerWidth * 3;
         object.rotation.x = -1.25 + mouseY*2.5 / window.innerHeight;
-        options.morph = Math.abs(Math.sin(time/100))
-        object.traverse((child) => {
-            if(child.morphTargetInfluences){
-                child.morphTargetInfluences[0] = options.morph
-            }
-        })
-        //object.morphTargetInfluences = Math.abs(Math.sin(time));
+        //console.log(object.rotation.x, object.rotation.y)
+        // options.morph = Math.abs(Math.sin(time/100))
+        // object.children[0].traverse((child) => {
+        //     if(child.morphTargetInfluences){
+        //         child.morphTargetInfluences[0] = options.morph
+        //     }
+        // })        
     }
     requestAnimationFrame(animate)
     renderer.render(scene, cam);
 }
 
 
+
+// //Raycaster
+const raycaster = new three.Raycaster();
+const pointer = new three.Vector2();
+
+function MouseClick( event ) {
+
+    // calculate pointer position in normalized device coordinates
+    // (-1 to +1) for both components
+
+    pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+    //console.log(pointer.x, pointer.y)
+
+    raycaster.setFromCamera( pointer, cam );
+
+    // calculate objects intersecting the picking ray
+    const intersects = raycaster.intersectObjects( object.children );
+
+    if(intersects[0].morphTargetInfluences){
+        intersects[0].morphTargetInfluences[0] = 1;
+    }
+
+    // for ( let i = 0; i < intersects.length; i ++ ) {
+    //     console.log('Button Pressed')
+    // 	//intersects[ i ].object.material.color.set( 0xff0000 );
+
+    // }
+
+    renderer.render( scene, cam );
+
+}
+
 window.addEventListener("mouse", onkeydown);
+window.addEventListener("click", MouseClick);
