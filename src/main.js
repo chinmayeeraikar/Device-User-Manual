@@ -1,7 +1,7 @@
 import * as three from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-import { objectWorldMatrix } from 'three/tsl';
+//import { objectWorldMatrix } from 'three/tsl';
 //import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 
 const scene = new three.Scene()
@@ -80,12 +80,12 @@ function animate(){
         object.rotation.y = -1.5 + 3.1415/2 + mouseX / window.innerWidth * 3;
         object.rotation.x = -1.25 + mouseY*2.5 / window.innerHeight;
         //console.log(object.rotation.x, object.rotation.y)
-        // options.morph = Math.abs(Math.sin(time/100))
-        // object.children[0].traverse((child) => {
-        //     if(child.morphTargetInfluences){
-        //         child.morphTargetInfluences[0] = options.morph
-        //     }
-        // })        
+        options.morph = Math.abs(Math.sin(time/100))
+        object.children[0].traverse((child) => {
+            if(child.morphTargetInfluences){
+                child.morphTargetInfluences[0] = options.morph
+            }
+        })        
     }
     requestAnimationFrame(animate)
     renderer.render(scene, cam);
