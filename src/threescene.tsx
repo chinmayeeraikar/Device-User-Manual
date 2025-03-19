@@ -98,7 +98,7 @@ function animate(){
 const raycaster = new three.Raycaster();
 const pointer = new three.Vector2();
 
-function MouseClick( event ) {
+function MouseClick( event : MouseEvent ) {
 
   // calculate pointer position in normalized device coordinates
   // (-1 to +1) for both components
