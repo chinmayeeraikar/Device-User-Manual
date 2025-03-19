@@ -91,7 +91,7 @@ const canvasRef = useRef<HTMLCanvasElement>(null);
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
 
-    const handleMouseClick = (event: MouseEvent) => {
+    const handleMouseClick = (event) => {
       pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
       pointer.y = (event.clientY / window.innerHeight) * 2 + 1;
 
@@ -102,7 +102,7 @@ const canvasRef = useRef<HTMLCanvasElement>(null);
 
         if (intersects.length > 0 &&
           'morphTargetInfluences' in intersects[0].object) {
-          intersects[0].object.morphTargetInfluences![0] = 1;
+          intersects[0].object.morphTargetInfluences[0] = 1;
           
         }
       }
@@ -116,7 +116,7 @@ const canvasRef = useRef<HTMLCanvasElement>(null);
     // };
 
     let drag = false
-    const mmove = (event: MouseEvent) =>{
+    const mmove = (event) =>{
       drag = true
     }
 
