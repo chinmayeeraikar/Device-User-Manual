@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+//import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 
 interface ThreeSceneProps {
@@ -87,15 +87,15 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
     renderer.setPixelRatio(maxPixelRatio);
 
     // Controls
-    controls = new OrbitControls(camera, renderer.domElement);
+    //controls = new OrbitControls(camera, renderer.domElement);
 
     // Raycaster for interactions
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
 
     const handleMouseClick = (event: MouseEvent) => {
-      //pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-      //pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = (event.clientY / window.innerHeight) * 2 + 1;
 
       raycaster.setFromCamera(pointer, camera);
 
@@ -111,14 +111,21 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-      mouseX = event.clientX;
-      mouseY = event.clientY;
+      if(drag = true){
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+      }
     };
+
+    let drag = false
+    const mmove = (event: MouseEvent) =>{
+      drag = true
+    }
 
     // Animation
     const animate = () => {
       if (object) {
-        object.rotation.y = -(-1.5 + 3.1415 / 2 + mouseX / window.innerWidth * 3);
+        object.rotation.y = -1.5 + 3.1415 / 2 + mouseX / window.innerWidth * 3;
         object.rotation.x = -1.25 + mouseY * 2.5 / window.innerHeight;
       }
 
@@ -127,7 +134,7 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
 
     // Event listeners
     window.addEventListener('click', handleMouseClick);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousedown', handleMouseMove);
 
     // Start animation loop
     renderer.setAnimationLoop(animate);
@@ -144,7 +151,8 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
     // Cleanup
     return () => {
       window.removeEventListener('click', handleMouseClick);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousedown', handleMouseMove);
+      window.removeEventListener('mousemove', mmove);
       window.removeEventListener('resize', handleResize);
       renderer.setAnimationLoop(null);
     };
