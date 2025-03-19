@@ -3,6 +3,7 @@ import "./App.css";
 import NavbarRoutes from "./Routes/NavbarRoutes";
 import { AppSidebar } from "./components/Sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
+import "./threescene.tsx"
 
 const App = () => {
   return (
