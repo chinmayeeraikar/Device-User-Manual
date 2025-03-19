@@ -1,10 +1,12 @@
 // import React from "react";
 import "./App.css";
 import NavbarRoutes from "./Routes/NavbarRoutes";
-import ThreeScene from "./Scene";
+// import ThreeScene from "./Scene";
 import { AppSidebar } from "./components/Sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import Scene from "./Scene";
+import "./threescene";
+import { Loader } from "lucide-react";
 
 const App = () => {
   return (
@@ -14,7 +16,8 @@ const App = () => {
         <SidebarTrigger className="-ml-1" />
       </SidebarProvider>
       <NavbarRoutes />
-      <ThreeScene />
+      <loader />
+      {/* <ThreeScene /> */}
       {/* <Scene /> */}
     </div>
   );
