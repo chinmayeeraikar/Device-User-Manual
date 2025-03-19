@@ -13,9 +13,15 @@
     "esModuleInterop": true,
     "jsx": "react",
     "allowJs": true,
-    "checkJs": false
+    "checkJs": false,
+    "noImplicitAny": false,
+    // For specific files only:
+    "skipLibCheck": true,
   },
-  // "include": [
-  //   "src/*/"
-  // ]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx"
+  ],
 }

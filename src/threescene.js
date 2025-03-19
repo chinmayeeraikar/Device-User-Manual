@@ -13,7 +13,7 @@ let object
 let objectTorender = 'Camera'
 let options = {morph:0}
 
-export const loader = new GLTFLoader()
+const loader = new GLTFLoader()
 loader.load(
     './assets/CameraBkdTex.glb', function(gltf){
         object = gltf.scene

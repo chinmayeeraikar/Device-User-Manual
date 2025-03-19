@@ -4,7 +4,9 @@ import NavbarRoutes from "./Routes/NavbarRoutes";
 // import ThreeScene from "./Scene";
 import { AppSidebar } from "./components/Sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
-import "./threescene";
+// import "./threescene";
+import { Canvas } from "@react-three/fiber";
+import Model from "./components/Model.jsx";
 
 const App = () => {
   return (
@@ -14,8 +16,9 @@ const App = () => {
         <SidebarTrigger className="-ml-1" />
       </SidebarProvider>
       <NavbarRoutes />
-      {/* <ThreeScene /> */}
-      {/* <Scene /> */}
+      <Canvas>
+        <Model />
+      </Canvas>
     </div>
   );
 };
