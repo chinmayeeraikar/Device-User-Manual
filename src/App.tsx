@@ -1,16 +1,21 @@
-import React from 'react';
-import { Scene } from './Scene';
-import './App.css';
+// import React from "react";
+import "./App.css";
+import NavbarRoutes from "./Routes/NavbarRoutes";
+import { AppSidebar } from "./components/Sidebar/AppSidebar";
+import SheetPopUp from "./components/Sidebar/SheetPopUp";
+import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 
-function App() {
-  const modelPath = '/path/to/your/model.glb'; // Update this with your model path
-  
+const App = () => {
   return (
-    <div className="App">
-      <Scene modelPath={'/assets/CameraBkdTex.glb'} />
+    <div>
+      <SidebarProvider className="absolute">
+        <AppSidebar />
+        {/* <SheetPopUp /> */}
+        <SidebarTrigger className="-ml-1" />
+      </SidebarProvider>
+      <NavbarRoutes />
     </div>
   );
-}
+};
 
 export default App;
-  

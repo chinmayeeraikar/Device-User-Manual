@@ -1,15 +1,10 @@
-import React, { useRef, useEffect } from 'react';
 import * as three from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-//import { objectWorldMatrix } from 'three/tsl';
-//import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+
 
 const scene = new three.Scene()
 scene.background = new three.Color(0x87CEEB)
-//const cubegeom = new three.BoxGeometry(0.5,0.5,0.5)
-//const cubematrl = new three.MeshBasicMaterial({color: "red"})
-//const cube = new three.Mesh(cubegeom, cubematrl)
 
 let mouseX = window.innerWidth/2
 let mouseY = window.innerHeight/2
