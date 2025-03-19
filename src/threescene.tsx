@@ -18,7 +18,6 @@ let controls
 let objectTorender = 'Camera'
 let options = {morph:0}
 
-const ThreeScene: React.FC<ThreeSceneProps> = ({
 const loader = new GLTFLoader()
 loader.load(
     './assets/CameraBkdTex.glb', function(gltf){
@@ -117,9 +116,13 @@ function MouseClick( event ) {
     const obj = intersects[0].object
     if(obj!=object.children[0] && obj!=object.children[1] && obj !=object.children[2]){
         if(obj.morphTargetInfluences){
-            intersects[0].object.morphTargetInfluences[0] = 1;
+            if(obj.morphTargetInfluences[0] != 1){
+                obj.morphTargetInfluences[0] = 1;
+            }
+            else if(obj.morphTargetInfluences[0] = 1){
+                obj.morphTargetInfluences[0] = 0;
+            }
             console.log(intersects[0].object.name, 'Pressed')
-            //intersects[0].object.morphTargetInfluences[0] = 0;
         }
     }
 
@@ -135,6 +138,3 @@ function MouseClick( event ) {
 
 window.addEventListener("mouse", onkeydown);
 window.addEventListener("click", MouseClick);
-
-})
-export default ThreeScene;

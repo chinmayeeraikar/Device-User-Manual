@@ -105,6 +105,7 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
         if (intersects.length > 0 &&
           'morphTargetInfluences' in intersects[0].object) {
           intersects[0].object.morphTargetInfluences![0] = 1;
+          
         }
       }
     };
