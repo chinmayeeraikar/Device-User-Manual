@@ -4,7 +4,7 @@ import NavbarRoutes from "./Routes/NavbarRoutes";
 import Scene from "./Scene";
 import { AppSidebar } from "./components/Sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
-import "./threescene.tsx"
+//import "./threescene.tsx"
 
 const App = () => {
   return (

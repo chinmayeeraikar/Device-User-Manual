@@ -1,3 +1,4 @@
+import React, { useEffect, useRef } from 'react';
 import * as three from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
@@ -17,6 +18,7 @@ let controls
 let objectTorender = 'Camera'
 let options = {morph:0}
 
+const ThreeScene: React.FC<ThreeSceneProps> = ({
 const loader = new GLTFLoader()
 loader.load(
     './assets/CameraBkdTex.glb', function(gltf){
@@ -56,7 +58,6 @@ light3.position.set(4, 2, 4)
 
 const cam = new three.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 30)
 cam.position.z=5
-//scene.add(cube)
 scene.add(cam)
 
 const canvas = document.querySelector('canvas.threejs')
@@ -134,3 +135,6 @@ function MouseClick( event ) {
 
 window.addEventListener("mouse", onkeydown);
 window.addEventListener("click", MouseClick);
+
+})
+export default ThreeScene;

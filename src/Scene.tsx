@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 
 interface ThreeSceneProps {
@@ -38,7 +38,7 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
         if (object.children.length > 0) {
           object.traverse((child) => {
             if ('morphTargetInfluences' in child) {
-              child.morphTargetInfluences![0] = options.morph;
+              child.morphTargetInfluences[0] = options.morph;
             }
           });
         }
@@ -94,8 +94,8 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
     const pointer = new THREE.Vector2();
 
     const handleMouseClick = (event: MouseEvent) => {
-      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-      pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      //pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      //pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
       raycaster.setFromCamera(pointer, camera);
 
@@ -117,7 +117,7 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
     // Animation
     const animate = () => {
       if (object) {
-        object.rotation.y = -1.5 + 3.1415 / 2 + mouseX / window.innerWidth * 3;
+        object.rotation.y = -(-1.5 + 3.1415 / 2 + mouseX / window.innerWidth * 3);
         object.rotation.x = -1.25 + mouseY * 2.5 / window.innerHeight;
       }
 
