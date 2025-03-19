@@ -4,12 +4,9 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 //import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 
-interface ThreeSceneProps {
-  modelPath?: string;
-}
 
-const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkdTex.glb' }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -42,6 +39,7 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
             }
           });
         }
+
       },
       (xhr) => {
         console.log((xhr.loaded / xhr.total * 100) + '% loaded');
@@ -110,12 +108,12 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
       }
     };
 
-    const handleMouseMove = (event: MouseEvent) => {
-      if(drag = true){
-        mouseX = event.clientX;
-        mouseY = event.clientY;
-      }
-    };
+    // const handleMouseMove = (event: MouseEvent) => {
+    //   if(drag = true){
+    //     mouseX = event.clientX;
+    //     mouseY = event.clientY;
+    //   }
+    // };
 
     let drag = false
     const mmove = (event: MouseEvent) =>{
@@ -125,8 +123,9 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
     // Animation
     const animate = () => {
       if (object) {
-        object.rotation.y = -1.5 + 3.1415 / 2 + mouseX / window.innerWidth * 3;
+        object.rotation.y = -(-1.5 + 3.1415 / 2 + mouseX / window.innerWidth * 3);
         object.rotation.x = -1.25 + mouseY * 2.5 / window.innerHeight;
+        object.position.z = 1
       }
 
       renderer.render(scene, camera);
@@ -134,7 +133,7 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
 
     // Event listeners
     window.addEventListener('click', handleMouseClick);
-    window.addEventListener('mousedown', handleMouseMove);
+    //.addEventListener('mousedown', handleMouseMove);
 
     // Start animation loop
     renderer.setAnimationLoop(animate);
@@ -151,7 +150,7 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
     // Cleanup
     return () => {
       window.removeEventListener('click', handleMouseClick);
-      window.removeEventListener('mousedown', handleMouseMove);
+      //window.removeEventListener('mousedown', handleMouseMove);
       window.removeEventListener('mousemove', mmove);
       window.removeEventListener('resize', handleResize);
       renderer.setAnimationLoop(null);
@@ -159,6 +158,6 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ modelPath = './assets/CameraBkd
   }, [modelPath]);
 
   return <canvas ref={canvasRef} style={{ width: '100%', height: '100vh' }} />;
-};
+
 
 export default ThreeScene;

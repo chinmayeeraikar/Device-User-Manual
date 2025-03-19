@@ -81,12 +81,12 @@ function animate(){
         object.rotation.x = -1.25 + mouseY*2.5 / window.innerHeight;
         object.position.z = 1
         //console.log(object.rotation.x, object.rotation.y)
-        // options.morph = Math.abs(Math.sin(time/100))
-        // object.children[0].traverse((child) => {
-        //     if(child.morphTargetInfluences){
-        //         child.morphTargetInfluences[0] = options.morph
-        //     }
-        // })        
+         options.morph = Math.abs(Math.sin(time/100))
+         object.children[0].traverse((child) => {
+             if(child.morphTargetInfluences){
+                 child.morphTargetInfluences[0] = options.morph
+             }
+         })        
     }
     requestAnimationFrame(animate)
     renderer.render(scene, cam);
@@ -98,7 +98,7 @@ function animate(){
 const raycaster = new three.Raycaster();
 const pointer = new three.Vector2();
 
-function MouseClick( event : MouseEvent ) {
+function MouseClick( event ) {
 
   // calculate pointer position in normalized device coordinates
   // (-1 to +1) for both components
@@ -138,3 +138,5 @@ function MouseClick( event : MouseEvent ) {
 
 window.addEventListener("mouse", onkeydown);
 window.addEventListener("click", MouseClick);
+
+export default loader

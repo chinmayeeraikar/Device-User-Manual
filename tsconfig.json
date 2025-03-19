@@ -11,5 +11,9 @@
     },
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "allowJs": true
   }
+  
 }
+
+
