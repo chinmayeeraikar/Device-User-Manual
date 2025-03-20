@@ -1,10 +1,9 @@
 // import React from "react";
 import "./App.css";
 import NavbarRoutes from "./Routes/NavbarRoutes";
-import Scene from "./Scene.js";
 import { AppSidebar } from "./components/Sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
-//import { loader } from "./threescene.js"
+import MyThree from "./threescene.tsx"
 
 const App = () => {
   return (
@@ -15,7 +14,7 @@ const App = () => {
         <SidebarTrigger className="-ml-1" />
       </SidebarProvider>
       <NavbarRoutes />
-      <Scene />
+      <MyThree />
     </div>
   );
 };
