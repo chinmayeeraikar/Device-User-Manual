@@ -22,3 +22,7 @@
     }
   }
   
+  .border-gradient {
+    border-image: linear-gradient(to bottom, #6d28d9, #4c1d95);
+    border-image-slice: 1;
+  }

@@ -13,6 +13,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { SheetPage } from "./SheetPage"
 
 export default function SidebarPage() {
   return (
@@ -21,6 +22,7 @@ export default function SidebarPage() {
       <AppSidebar />
       <SidebarTrigger className="-ml-1" />
     </SidebarProvider>
+    <SheetPage />
     </>
   )
 }

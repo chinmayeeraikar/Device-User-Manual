@@ -3,12 +3,16 @@ import React, { useRef, useEffect } from 'react';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import * as THREE from 'three';
+//import * as THREE from 'three';
+// import SheetPopUp from './components/Sidebar/SheetPopUp';
+import { Sheet, Sidebar } from 'lucide-react';
+//import YourComponent from './components/ButtonInfoPopUp';
+
 
 // The actual scene component that will be used inside the Canvas
 function Scene() {
   const gltf = useLoader(GLTFLoader, './assets/CameraBkdTex.glb');
-  const modelRef = useRef();
+  const modelRef = useRef(); 
   const { camera } = useThree();
   
   useEffect(() => {
@@ -29,7 +33,9 @@ function Scene() {
       const model = modelRef.current;
       model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
       model.rotation.x = -1.25 + (2.5/2) ;
-      model.position.z = 1;
+      model.position.z = -1;
+      //model.children[16].rotation.y = -Math.PI;
+
       // Morph target animation
       const time = clock.getElapsedTime();
       const morphValue = Math.abs(Math.sin(time/10));
@@ -47,6 +53,7 @@ function Scene() {
       <directionalLight position={[2, 2, 5]} castShadow intensity={1} />
       <directionalLight position={[-2, 2, -5]} castShadow intensity={1} />
       <directionalLight position={[4, 2, 4]} intensity={1} />
+      <ambientLight position = {[5,5,5]} intensity = {1}/>
       
       {/* Model */}
       <primitive 
@@ -59,6 +66,7 @@ function Scene() {
           if (obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
             console.log(obj.name, 'Pressed');
+            window.dispatchEvent(new Event("toggleActiveClass"))
           }
         }}
       />
