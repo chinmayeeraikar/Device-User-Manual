@@ -53,7 +53,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader className="font-bold text-[30px]">MODEL NAME</SidebarHeader>
+      <SidebarHeader className="font-bold text-[30px] text-green-100">MODEL NAME</SidebarHeader>
       <SidebarContent className="gap-0">
         {data.navMain.map((item) => (
           <Collapsible
@@ -67,14 +67,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 asChild
                 className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
               >
-                <CollapsibleTrigger>
+                <CollapsibleTrigger className="text-white">
                   {item.title}{" "}
-                  <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                  <ChevronRight className="ml-auto text-green-100 transition-transform group-data-[state=open]/collapsible:rotate-90" />
                 </CollapsibleTrigger>
               </SidebarGroupLabel>
               <CollapsibleContent>
                 <SidebarGroupContent>
-                  <SidebarMenu>
+                  <SidebarMenu className="text-green-100">
                     {item.items.map((subItem) => (
                       <SidebarMenuItem key={subItem.title}>
                         <SheetPopUp

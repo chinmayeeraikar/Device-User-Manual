@@ -11,10 +11,10 @@ export const Home = () => {
       <h1></h1>
       {/* <Slider defaultValue={[3]} max={50} step={1} /> */}
       <div >
-        <SidebarProvider className="fixed top-0 left-0 z-50 p-4">
+        <SidebarProvider className="fixed top-0 left-0 z-20 p-4">
           <AppSidebar />
           {/*<SheetPopUp />*/}
-          <SidebarTrigger className="-ml-1" />
+          <SidebarTrigger className="-ml-1" style={{ zIndex: 10 }}/>
         </SidebarProvider>
       </div>
       <div className="w-1/4 absolute inset-x-1/2 -translate-x-1/2 -inset-y-1/7 inset-y-120">
