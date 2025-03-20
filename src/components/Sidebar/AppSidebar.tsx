@@ -39,9 +39,9 @@ export const data = {
           desc: "This is the zoom feature",
         },
         {
-          title: "Brightness",
+          title: "View Media",
           url: "#",
-          desc: "This is the brightness feature",
+          desc: "To view media, press the media button, which is at the bottom right.",
         },
       ],
     },
