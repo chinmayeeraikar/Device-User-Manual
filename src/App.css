@@ -5,6 +5,8 @@
 
 body {
   background-color: #b5fac7;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .pages {

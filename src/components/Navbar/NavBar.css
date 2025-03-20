@@ -9,9 +9,11 @@
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  position: sticky;
+  position:relative;
   top: 0;
-  z-index: 20;
+  z-index:1;
+
+  
 }
 
 .nav-container {
