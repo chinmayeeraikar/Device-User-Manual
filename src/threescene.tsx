@@ -35,7 +35,6 @@ function Scene() {
       model.rotation.x = -1.25 + (2.5/2) ;
       model.position.y = 1;
       //model.children[16].rotation.y = -Math.PI;
-
       // Morph target animation
       const time = clock.getElapsedTime();
       const morphValue = Math.abs(Math.sin(time/10));

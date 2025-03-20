@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+//import { Button } from "./ui/button";
 
 const YourComponent = () => {
   const [isActive, setIsActive] = useState(false);
+  const [triggerElement, setTriggerElement] = useState(null);
 
   useEffect(() => {
-    const toggleVisibility = () => {
+    // Modify the event handler to accept the event parameter
+    const toggleVisibility = (event) => {
+      // Access detail values from the event
+      if (event && event.detail) {
+        // Store the trigger element in state if needed
+        setTriggerElement(event.detail);
+        console.log("Event triggered by:", event.detail);
+        
+        // Access any other detail properties
+      }
+      
+      // Toggle the active state as before
       setIsActive((prev) => !prev);
     };
 
@@ -16,23 +28,18 @@ const YourComponent = () => {
     };
   }, []);
 
-console.log("oooooooo")
+  console.log("oooooooo");
 
   return (
     <div className="absolute bottom-0 right-0">
       {isActive && (
         <div>
           <p>This is your pop-up component!</p>
+          {triggerElement && <p>Triggered by element ID: {triggerElement}</p>}
         </div>
       )}
     </div>
-    // <div>
-    //     <Button className="absolute bottom-0 right-0">
-    //         Hiiiiii
-    //     </Button>
-    // </div>
   );
 };
 
 export default YourComponent;
-
