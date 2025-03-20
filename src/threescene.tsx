@@ -18,6 +18,7 @@ function Scene() {
           child.morphTargetInfluences[0] = 0;
         }
       });
+      //console.log(gltf.scene)
     }
     
     camera.position.z = 5;
@@ -29,11 +30,10 @@ function Scene() {
       model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
       model.rotation.x = -1.25 + (2.5/2) ;
       model.position.z = 1;
-      
       // Morph target animation
       const time = clock.getElapsedTime();
       const morphValue = Math.abs(Math.sin(time/10));
-      model.traverse((child) => {
+      model.children[0].traverse((child) => {
         if (child.morphTargetInfluences) {
           child.morphTargetInfluences[0] = morphValue;
         }
