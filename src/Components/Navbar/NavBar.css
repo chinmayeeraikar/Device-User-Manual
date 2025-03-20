@@ -51,7 +51,7 @@
   text-align: center;
   margin: 0; /* Remove margin */
   gap: 16px; /* Uniform gap between menu items */
-  z-index: 20;
+  z-index: 40;
 }
 
 .nav-menu:after{

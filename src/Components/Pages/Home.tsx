@@ -1,6 +1,6 @@
 // import React from "react";
 // import { Slider } from "@/components/ui/slider"
-import { Slider } from "../Controls/Slider.tsx";
+//import { Slider } from "../Controls/Slider.tsx";
 import { AppSidebar } from "../Sidebar/AppSidebar";
 //import SheetPopUp from "./components/Sidebar/SheetPopUp";
 import { SidebarProvider, SidebarTrigger } from "../ui/sidebar";
@@ -10,8 +10,8 @@ export const Home = () => {
     <div>
       <h1></h1>
       {/* <Slider defaultValue={[3]} max={50} step={1} /> */}
-      <div>
-        <SidebarProvider className="absolute">
+      <div >
+        <SidebarProvider className="fixed top-0 left-0 z-50 p-4">
           <AppSidebar />
           {/*<SheetPopUp />*/}
           <SidebarTrigger className="-ml-1" />

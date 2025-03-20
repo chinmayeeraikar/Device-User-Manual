@@ -6,7 +6,6 @@ import { HamburgetMenuClose, HamburgetMenuOpen } from "../Icons";
 const NavBar: React.FC = () => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
-
   return (
     <nav className="navbar">
       <div className="nav-container">
