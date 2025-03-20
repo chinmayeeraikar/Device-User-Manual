@@ -18,7 +18,7 @@ export const Home = () => {
         </SidebarProvider>
       </div>
       <div className="w-1/4 absolute inset-x-1/2 -translate-x-1/2 -inset-y-1/7 inset-y-120">
-      <Slider />
+      {/* <Slider /> */}
       </div>
     </div>
   );
