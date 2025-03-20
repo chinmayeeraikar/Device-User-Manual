@@ -21,9 +21,7 @@ console.log("oooooooo")
   return (
     <div className="absolute bottom-0 right-0">
       {isActive && (
-        <div
-          className="p-6 bg-white shadow-lg rounded-lg transition-transform transform scale-0 animate-fade-in-out"
-        >
+        <div>
           <p>This is your pop-up component!</p>
         </div>
       )}

@@ -5,7 +5,7 @@ import { XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
-  return <SheetPrimitive.Root data-slot="sheet" {...props} />;
+  return <SheetPrimitive.Root data-slot="sheet" modal={false} {...props} />;
 }
 
 function SheetTrigger({
@@ -34,7 +34,7 @@ function SheetOverlay({
     <SheetPrimitive.Overlay
       data-slot="sheet-overlay"
       className={cn(
-        "fixed inset-0 z-50 ", // Smoother overlay with blur
+        "fixed inset-0 z-50 pointer-events-none", // Smoother overlay with blur
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
         className
@@ -71,8 +71,21 @@ function SheetContent({
             "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t rounded-t-lg border-gradient", // Added rounded corners and gradient border
           className
         )}
-        onInteractOutside={(e)=>e.preventDefault()}
         {...props}
+        onInteractOutside={(e) => {
+          // Ensure we are accessing the original event for better control
+          const originalEvent = e.detail.originalEvent as MouseEvent | TouchEvent;
+      
+          // If there is no valid original event, exit early
+          if (!originalEvent) return;
+      
+          // Get the clicked target
+          const target = originalEvent.target as HTMLElement | null;
+      
+          if (target && !target.closest("[data-slot='sheet-content']")) {
+            e.preventDefault(); // Prevent sheet from closing, but allow interactions
+          }
+        }}
       >
         {children}
         <SheetPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-full p-2 opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none">

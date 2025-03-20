@@ -33,7 +33,7 @@ function Scene() {
       const model = modelRef.current;
       model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
       model.rotation.x = -1.25 + (2.5/2) ;
-      model.position.z = -1;
+      model.position.y = 1;
       //model.children[16].rotation.y = -Math.PI;
 
       // Morph target animation
@@ -78,7 +78,7 @@ function Scene() {
 // Main component with Canvas
 function MyThreeScene() {
   return (
-    <Canvas style={{ background: '#87CEEB', height: '500px' }}>
+    <Canvas style={{ background: '0xffffff, 0', height: '800px' }}>
       <Scene />
     </Canvas>
   );
