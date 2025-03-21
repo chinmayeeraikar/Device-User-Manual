@@ -58,8 +58,8 @@ function SheetContent({
       <SheetPrimitive.Content
         data-slot="sheet-content"
         className={cn(
-          "bg-background fixed z-50 flex flex-col gap-4 shadow-xl transition-all ease-in-out p-6", // Added shadow-xl
-          "bg-blue-100 ",
+          "bg-yellow-200 fixed z-50 flex flex-col gap-4 shadow-xl transition-all ease-in-out p-6", // Added shadow-xl
+          
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
           side === "right" &&
             "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 sm:w-80 border-l sm:max-w-sm rounded-l-lg border-gradient", // Added rounded corners and gradient border

@@ -2,8 +2,17 @@
 
 export const About = () => {
   return (
-    <div>
-      <h1>About</h1>
+    <div className="flex">
+      <div className="flex col-3 bg-red-300">
+
+      </div>
+      <div className="flex col-3 bg-red-300">
+
+</div>
+<div className="flex col-3 bg-red-300">
+
+</div>
+
     </div>
   );
 };

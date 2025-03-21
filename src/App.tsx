@@ -10,11 +10,10 @@ import YourComponent from './components/ButtonInfoPopUp';
 const App = () => {
   return (
     <div>
-      <SidebarProvider className="absolute">
+      {/* <SidebarProvider className="absolute">
         <AppSidebar />
-        {/* <SheetPopUp /> */}
         <SidebarTrigger className="-ml-1" />
-      </SidebarProvider>
+      </SidebarProvider> */}
       <NavbarRoutes />
       <MyThree /> 
       <YourComponent/>

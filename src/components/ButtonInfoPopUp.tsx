@@ -27,25 +27,28 @@ const YourComponent = () => {
     
     switch (triggerElement) {
       case "InfoButton":
-        return <p>This was triggered by the InfoButton</p>;
+        return <p>The INFO button shows or hides information. It incrementally adds<br></br>information to the screen while clicking pictures. The information shown on<br></br>screen includes the exposure, f-stop, ISO, Angle tilt, etc.    
+         </p>;
       case "MediaButton":
         return <p>The Media Button activated this component</p>;
-      case "navbar":
-        return <p>Navigation menu triggered this display</p>;
+      case "MenuButton":
+        return <p>MenuButton for settings</p>;
       case "sidebar":
         return <p>Sidebar interaction detected</p>;
-      default:d
-        return <p>Triggered by element ID: {triggerElement}</p>;
+      default:
+        return <p></p>;
     }
   };
 
   console.log("oooooooo");
 
   return (
-    <div className="absolute bottom-0 right-0">
+    <div className="absolute bottom-20 right-1/2">
       {isActive && (
-        <div className="bg-white p-4 rounded shadow-lg border border-gray-200">
+        <div className="bg-yellow-200 p-10 gap-10 rounded shadow-lg border border-gray-200">
+          <p className="p-100 text-centre">
           {renderContentBasedOnTrigger()}
+          </p>
         </div>
       )}
     </div>
