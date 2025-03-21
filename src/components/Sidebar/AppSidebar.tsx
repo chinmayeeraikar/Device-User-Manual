@@ -195,7 +195,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                           trigger={
                             <SidebarMenuButton
                               asChild
-                              onClick={() => setSelectedItem(subItem)}
+                              onClick={() => {
+                                setSelectedItem(subItem)
+                                const feature = new CustomEvent("featureSelected",{
+                                  detail:subItem
+                                })
+                                window.dispatchEvent(feature)
+                              }}
                             >
                               <Button variant="ghost" className="w-full justify-start">
                                 {subItem.title}

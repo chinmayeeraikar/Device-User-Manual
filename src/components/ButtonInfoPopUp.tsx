@@ -6,18 +6,14 @@ const YourComponent = () => {
   const [triggerElement, setTriggerElement] = useState(null);
 
   useEffect(() => {
-    // Modify the event handler to accept the event parameter
     const toggleVisibility = (event) => {
-      // Access detail values from the event
+
       if (event && event.detail) {
-        // Store the trigger element in state if needed
         setTriggerElement(event.detail);
         console.log("Event triggered by:", event.detail);
         
-        // Access any other detail properties
       }
       
-      // Toggle the active state as before
       setIsActive((prev) => !prev);
     };
 
