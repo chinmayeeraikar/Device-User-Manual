@@ -19,7 +19,7 @@ export default function SidebarPage() {
   return (
     <>
     <SidebarProvider className="bg-red">
-      <AppSidebar />
+      <AppSidebar/>
       <SidebarTrigger className="-ml-1" />
     </SidebarProvider>
     <SheetPage />

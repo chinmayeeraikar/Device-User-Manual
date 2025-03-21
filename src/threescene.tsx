@@ -65,7 +65,8 @@ function Scene() {
       
       <directionalLight position={[2, 2, 5]} castShadow intensity={1} />
       <directionalLight position={[-2, 2, -5]} castShadow intensity={1} />
-      <directionalLight position={[4, 2, 4]} intensity={1} />
+         
+         <directionalLight position={[4, 2, 4]} intensity={1} />
       <ambientLight position = {[5,5,5]} intensity = {1}/>
       
       

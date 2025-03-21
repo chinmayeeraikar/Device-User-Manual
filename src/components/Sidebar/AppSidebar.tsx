@@ -167,7 +167,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader className="font-bold text-[30px] text-white">MODEL NAME</SidebarHeader>
+      <SidebarHeader className="font-bold text-[30px] text-white">Camera User Manual</SidebarHeader>
       <SidebarContent className="gap-0">
         {data.navMain.map((item) => (
           <Collapsible

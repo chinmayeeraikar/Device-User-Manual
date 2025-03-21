@@ -13,35 +13,35 @@ export const Contact = () => {
   const teamMembers = [
     {
       name: "Rewa Shete",
-      description: "Second year engineering students.",
+      description: "Second year engineering student.",
       imageUrl: "/api/placeholder/400/400",
       initials: "RS",
     },
     {
       name: "Chinmayee Raikar",
-      description: "Second year engineering students.",
+      description: "Second year engineering student.",
       imageUrl: "/api/placeholder/400/400",
       initials: "CR",
     },
     {
       name: "Tanvi Yeola",
-      description: "Second year engineering students.",
+      description: "Second year engineering student.",
       imageUrl: "/api/placeholder/400/400",
       initials: "TY",
     },
     {
       name: "Sanika Surange",
-      description: "Second year engineering students.",
+      description: "Second year engineering student.",
       imageUrl: "/api/placeholder/400/400",
       initials: "SS",
     },
   ];
 
   return (
-    <div className="py-12 px-8 bg-transparent">
-      <h2 className="text-3xl font-bold text-center mb-12">Our Team</h2>
+    <div className="py-12 bg-transparent relative top-20 left-40 w-300">
+      <h2 className="text-3xl font-bold text-center ">Our Team</h2>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 px-4 mx-10">
+      <div className="max-w-7xl relative top-20 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 ">
         {teamMembers.map((member, index) => (
           <Card
             key={index}
