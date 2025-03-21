@@ -34,7 +34,7 @@ const YourComponent = () => {
         return <p>Navigation menu triggered this display</p>;
       case "sidebar":
         return <p>Sidebar interaction detected</p>;
-      default:
+      default:d
         return <p>Triggered by element ID: {triggerElement}</p>;
     }
   };
