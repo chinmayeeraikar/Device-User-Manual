@@ -155,7 +155,7 @@ export const data = {
         {
           title: "Media",
           url: "#",
-          desc: "To view mdia, press button on bottom left",
+          desc: "To view media, press button on bottom left",
         },
       ],
     },
