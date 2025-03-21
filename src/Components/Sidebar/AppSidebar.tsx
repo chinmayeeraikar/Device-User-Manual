@@ -74,7 +74,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </SidebarGroupLabel>
               <CollapsibleContent>
                 <SidebarGroupContent>
-                  <SidebarMenu className="text-green-100">
+                  <SidebarMenu>
                     {item.items.map((subItem) => (
                       <SidebarMenuItem key={subItem.title}>
                         <SheetPopUp
