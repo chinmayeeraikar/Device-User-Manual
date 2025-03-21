@@ -78,12 +78,10 @@ function Scene() {
           if (obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
             console.log(obj.name, 'Pressed');
-            if(obj.morphTargetInfluences[0] == 1){
               const butnprs = new CustomEvent("toggleActiveClass", {
                 detail: obj.name
               });
               window.dispatchEvent(butnprs);
-            }
           }
         }}
       />
