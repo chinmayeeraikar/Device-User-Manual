@@ -46,6 +46,7 @@ function Scene() {
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
         model.rotation.x = -1.25 + (2.5/2) ;
         model.position.y = 1;
+        console.log(model)
         //console.log("main")
         //model.children[16].rotation.y = -Math.PI;
         const time = clock.getElapsedTime();
