@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { Mouse } from 'lucide-react';
 //import * as THREE from 'three';
 
 
@@ -24,25 +25,18 @@ function Scene() {
     camera.position.z = 5;
   }, [gltf, camera]);
   
+  let feature = 'View'
   useFrame(({ clock }) => {
-    let selectedFeature;
     const featureDemo = (event) => {
-
       if (event && event.detail && modelRef.current) {
-        selectedFeature = (event.detail);
-        const model = modelRef.current;
+        feature = (event.detail);
         console.log("Event triggered by:", event.detail.title);
-        if(event.detail.title = 'Zoom'){
-          model.rotation.x = -1.25 + (2.5/2) + Math.PI/2;
-          model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
-        }
-        
       }
     };
     if (modelRef.current) {
       const model = modelRef.current;
-      //window.addEventListener("featureSelected", featureDemo);
-      //if(!featureDemo){
+      window.addEventListener("featureSelected", featureDemo);
+      if(feature == 'View'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
         model.rotation.x = -1.25 + (2.5/2) ;
         model.position.y = 1;
@@ -56,7 +50,12 @@ function Scene() {
             child.morphTargetInfluences[0] = morphValue;
           }
         });
-      //}
+      }
+      else if(feature = 'Zoom'){
+        model.rotation.x = -1.25 + (2.5/2) + Math.PI/2;
+        model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
+        model.position.z = -2
+      }
     }
   });
   
