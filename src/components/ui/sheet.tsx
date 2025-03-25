@@ -17,6 +17,10 @@ function SheetTrigger({
 function SheetClose({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Close>) {
+  const feature = new CustomEvent("featureSelected",{
+    detail:'View'
+  })
+  window.dispatchEvent(feature)
   return <SheetPrimitive.Close data-slot="sheet-close" {...props} />;
 }
 
