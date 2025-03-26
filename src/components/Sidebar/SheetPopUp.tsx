@@ -13,6 +13,7 @@ interface SheetPopUpProps {
   selectedItem: {
     title: string;
     desc: string;
+    source: string;
   } | null;
 }
 
@@ -22,12 +23,20 @@ export const SheetPopUp = ({ trigger, selectedItem }: SheetPopUpProps) => {
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle className="text-2xl font-bold">{selectedItem?.title}</SheetTitle>
-          <SheetDescription className="pt-4">{selectedItem?.desc}</SheetDescription>
+          <SheetTitle className="text-2xl font-bold">
+            {selectedItem?.title}
+          </SheetTitle>
+          <SheetDescription className="pt-4">
+            {selectedItem?.desc}
+          </SheetDescription>
         </SheetHeader>
+
+        <video width="auto" height="500" controls>
+          <source src={selectedItem?.source} type="video/mp4" />
+        </video>
       </SheetContent>
     </Sheet>
   );
-};  
+};
 
 export default SheetPopUp;
