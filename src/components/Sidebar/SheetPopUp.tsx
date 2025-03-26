@@ -37,6 +37,7 @@ export const SheetPopUp = ({ trigger, selectedItem }: SheetPopUpProps) => {
       </SheetContent>
     </Sheet>
   );
+
 };
 
 export default SheetPopUp;
