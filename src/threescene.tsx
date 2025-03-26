@@ -36,6 +36,7 @@ function Scene() {
     if (modelRef.current) {
       const model = modelRef.current;
       window.addEventListener("featureSelected", featureDemo);
+      console.log(feature)
       if(feature == 'View'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
         model.rotation.x = -1.25 + (2.5/2) ;
