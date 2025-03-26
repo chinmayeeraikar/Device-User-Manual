@@ -6,7 +6,7 @@ const YourComponent = () => {
   const [triggerElement, setTriggerElement] = useState(null);
 
   useEffect(() => {
-    const toggleVisibility = (event) => {
+    const toggleVisibility = ( event ) => {
       if (event && event.detail) {
         setTriggerElement(event.detail);
         console.log("Event triggered by:", event.detail);
@@ -41,23 +41,22 @@ const YourComponent = () => {
         return <div className="bg-yellow-200 !p-5 gap-10 rounded shadow-lg border border-gray-200"><p><strong>ClickPicture Button </strong>This button is used to set focus and Click Images. A light press changes focus object and hard press Clicks picture</p></div>;
       case "SET" :
         return <div className="bg-yellow-200 !p-5 gap-10 rounded shadow-lg border border-gray-200"><p><strong>SET Button </strong>This button has various uses. It is used to select a setting/or image etc. It is also used to apply settings</p></div>
-      case "Video":
-        return <div className="bg-yellow-200 !p-5 gap-10 rounded shadow-lg border border-gray-200"><p><strong>Video Button </strong>Start and stop Video shooting</p></div>;
+      case "Cylinder015_1":
+        return <div className="bg-yellow-200 !p-5 gap-10 rounded shadow-lg border border-gray-200"><p><strong>Video Button </strong>Start / Stop a video shooting</p></div>;
       case "UP":
         return <div className="bg-yellow-200 !p-5 gap-10 rounded shadow-lg border border-gray-200"><p><strong>UP Button </strong>Navigate menu/ Adjust exposure</p></div>;
-        case "Down":
+      case "Down":
         return <div className="bg-yellow-200 !p-5 gap-10 rounded shadow-lg border border-gray-200"><p><strong>DOWN Button </strong>Navigate pages/ Delete media</p></div>;
-        case "Left":
+      case "Left":
         return <div className="bg-yellow-200 !p-5 gap-10 rounded shadow-lg border border-gray-200"><p><strong>LEFT Button </strong>Navigate pages/ Toggle manual focus and macro mode</p></div>;
-        case "Right":
-        return <div className="bg-yellow-200 !p-5 gap-10 rounded shadow-lg border border-gray-200"><p><strong>RIGHT Button </strong>Navigate pages/ Toggle flash</p></div>;
-        
+      case "Right":
+        return <div className="bg-yellow-200 !p-5 gap-10 rounded shadow-lg border border-gray-200"><p><strong>RIGHT Button </strong>Navigate pages/ Toggle flash</p></div>;          
       default:
         return ;
     }
   };
 
-  console.log("oooooooo");
+  //console.log("oooooooo");
 
   return (
     <div className="fixed inset-x-0 bottom-10 flex justify-center ">

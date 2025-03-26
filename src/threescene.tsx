@@ -6,12 +6,11 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Mouse } from 'lucide-react';
 //import * as THREE from 'three';
 
-
 function Scene() {
   const gltf = useLoader(GLTFLoader, './assets/CameraBkdTex.glb');
   const modelRef = useRef(); 
   const { camera } = useThree();
-  
+
   useEffect(() => {
     if (gltf) {
       gltf.scene.traverse((child) => {
@@ -21,10 +20,10 @@ function Scene() {
       });
       //console.log(gltf.scene)
     }
-    
+
     camera.position.z = 5;
   }, [gltf, camera]);
-  
+
   let feature = 'View'
   useFrame(({ clock }) => {
     const featureDemo = (event) => {
@@ -36,12 +35,11 @@ function Scene() {
     if (modelRef.current) {
       const model = modelRef.current;
       window.addEventListener("featureSelected", featureDemo);
-      console.log(feature)
+      //console.log(feature)
       if(feature == 'View'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
         model.rotation.x = -1.25 + (2.5/2) ;
         model.position.y = 1;
-        console.log(model)
         //console.log("main")
         //model.children[16].rotation.y = -Math.PI;
         const time = clock.getElapsedTime();
@@ -55,25 +53,24 @@ function Scene() {
       else if(feature = 'Zoom'){
         model.rotation.x = -1.25 + (2.5/2) + Math.PI/2;
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
-        model.position.z = -2
+        //console.log(model.rotation.x, model.rotation.y)
       }
     }
   });
-  
+
   return (
     <>
-      
+
       <directionalLight position={[2, 2, 5]} castShadow intensity={1} />
       <directionalLight position={[-2, 2, -5]} castShadow intensity={1} />
       <directionalLight position={[4, 2, 4]} intensity={1} />
       <ambientLight position = {[5,5,5]} intensity = {1}/>
-      
-      
+
       <primitive 
         ref={modelRef} 
         object={gltf.scene} 
         onClick={(e) => {
-          
+
           e.stopPropagation();
           const obj = e.object;
           if (obj.morphTargetInfluences) {
