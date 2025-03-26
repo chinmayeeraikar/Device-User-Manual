@@ -57,8 +57,6 @@
 //   ],
 // }
 
-
-
 // export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 //   return (
 //     <Sidebar {...props}>
@@ -93,11 +91,11 @@
 //                   <SidebarMenu>
 //                     {item.items.map((item) => (
 //                       <SidebarMenuItem key={item.title}>
-//                         <SidebarMenuButton asChild 
+//                         <SidebarMenuButton asChild
 //                         // isActive={item.isActive}
 //                         >
 //                           <a href={item.url}>{item.title}</a>
-//                         </SidebarMenuButton>  
+//                         </SidebarMenuButton>
 //                       </SidebarMenuItem>
 //                     ))}
 //                   </SidebarMenu>
@@ -138,6 +136,7 @@ interface SidebarItem {
   title: string;
   url: string;
   desc: string;
+  source: string;
 }
 
 // Sample data
@@ -151,11 +150,15 @@ export const data = {
           title: "Zoom",
           url: "#",
           desc: "This is the zoom feature",
+          source:
+            "https://www.youtube.com/watch?v=05VMLS2Xd0o&ab_channel=Naturein10Second",
         },
         {
           title: "Media",
           url: "#",
           desc: "To view media, press button on bottom left",
+          source:
+            "https://www.youtube.com/watch?v=05VMLS2Xd0o&ab_channel=Naturein10Second",
         },
       ],
     },
@@ -163,11 +166,15 @@ export const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const [selectedItem, setSelectedItem] = React.useState<SidebarItem | null>(null);
+  const [selectedItem, setSelectedItem] = React.useState<SidebarItem | null>(
+    null
+  );
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader className="font-bold text-[30px] text-white">Camera User Manual</SidebarHeader>
+      <SidebarHeader className="font-bold text-[30px] text-white">
+        Camera User Manual
+      </SidebarHeader>
       <SidebarContent className="gap-0">
         {data.navMain.map((item) => (
           <Collapsible
@@ -196,14 +203,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             <SidebarMenuButton
                               asChild
                               onClick={() => {
-                                setSelectedItem(subItem)
-                                const feature = new CustomEvent("featureSelected",{
-                                  detail:subItem
-                                })
-                                window.dispatchEvent(feature)
+                                setSelectedItem(subItem);
+                                const feature = new CustomEvent(
+                                  "featureSelected",
+                                  {
+                                    detail: subItem,
+                                  }
+                                );
+                                window.dispatchEvent(feature);
                               }}
                             >
-                              <Button variant="ghost" className="w-full justify-start">
+                              <Button
+                                variant="ghost"
+                                className="w-full justify-start"
+                              >
                                 {subItem.title}
                               </Button>
                             </SidebarMenuButton>
