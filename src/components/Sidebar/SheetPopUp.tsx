@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -15,13 +15,30 @@ interface SheetPopUpProps {
     desc: string;
     source: string;
   } | null;
+  onClose?: () => void; // Optional callback for when sheet closes
 }
 
-export const SheetPopUp = ({ trigger, selectedItem }: SheetPopUpProps) => {
+export const SheetPopUp = ({
+  trigger,
+  selectedItem,
+  onClose,
+}: SheetPopUpProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+
+    if (!open) {
+      console.log("Sheet was closed, now we can do something else!");
+      // Call the optional onClose callback
+      onClose?.();
+    }
+  };
+
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
-      <SheetContent>
+      <SheetContent side="right" className="w-[400px] sm:w-[540px]">
         <SheetHeader>
           <SheetTitle className="text-2xl font-bold">
             {selectedItem?.title}
@@ -31,13 +48,15 @@ export const SheetPopUp = ({ trigger, selectedItem }: SheetPopUpProps) => {
           </SheetDescription>
         </SheetHeader>
 
-        <video width="auto" height="500" controls>
-          <source src={selectedItem?.source} type="video/mp4" />
-        </video>
+        <div className="mt-6">
+          <video width="100%" height="auto" controls className="rounded-lg">
+            <source src={selectedItem?.source} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </SheetContent>
     </Sheet>
   );
-
 };
 
 export default SheetPopUp;
