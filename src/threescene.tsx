@@ -26,21 +26,28 @@ function Scene() {
 
   let feature = 'View'
   useFrame(({ clock }) => {
+    //console.log(camera.rotation.x, camera.rotation.y)
     const featureDemo = (event) => {
       if (event && event.detail && modelRef.current) {
         feature = (event.detail);
         console.log("Event triggered by:", event.detail.title);
+        camera.position.x = 0
+        camera.position.y = 3.061616997868383e-16
+        camera.position.z = 4
+        camera.rotation.x = -6.123233995736766e-17 
+        camera.rotation.y = 0
+        camera.rotation.z = 0
       }
     };
     if (modelRef.current) {
       const model = modelRef.current;
       window.addEventListener("featureSelected", featureDemo);
-      //console.log(feature)
+      console.log('xp: ', camera.position.x, '  yp: ', camera.position.y,'  xr: ', camera.rotation.x, ' yr: ', camera.rotation.y )
       if(feature == 'View'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
         model.rotation.x = -1.25 + (2.5/2) ;
         model.position.y = 1;
-        //console.log("main")
+        console.log(model.position.z, model.rotation.z)
         //model.children[16].rotation.y = -Math.PI;
         const time = clock.getElapsedTime();
         const morphValue = Math.abs(Math.sin(time/10));
@@ -51,8 +58,8 @@ function Scene() {
         });
       }
       else if(feature = 'Zoom'){
-        model.rotation.x = -1.25 + (2.5/2) + Math.PI/2;
-        model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
+        model.rotation.x = -1.25 + (2.5/2) - Math.PI/2;
+        model.rotation.y = -(-1.5 - Math.PI/2 + (3/2) );
         //console.log(model.rotation.x, model.rotation.y)
       }
     }
