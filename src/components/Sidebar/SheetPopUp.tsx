@@ -7,6 +7,7 @@
     SheetTitle,
     SheetTrigger,
   } from "@/components/ui/sheet";
+import { Slider } from "@radix-ui/react-slider";
 
   interface SheetPopUpProps {
     trigger: React.ReactNode;
@@ -15,6 +16,7 @@
       desc: string;
       source: string;
     } | null;
+    sliderComponent? :React.ReactNode;
     onClose?: () => void; // Optional callback for when sheet closes
   }
 
@@ -22,6 +24,7 @@
     trigger,
     selectedItem,
     onClose,
+    sliderComponent,
   }: SheetPopUpProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -47,7 +50,14 @@
               {selectedItem?.desc}
             </SheetDescription>
           </SheetHeader>
-
+  
+          {/* Add the slider component here if it exists */}
+          {sliderComponent && (
+            <div className="mt-4 mb-4">
+              {sliderComponent}
+            </div>
+          )}
+  
           <div className="mt-6">
             <video width="100%" height="auto" controls className="rounded-lg">
               <source src={selectedItem?.source} type="video/mp4" />
@@ -58,5 +68,5 @@
       </Sheet>
     );
   };
-
+  
   export default SheetPopUp;
