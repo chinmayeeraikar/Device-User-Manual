@@ -115,6 +115,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 );
                                 window.dispatchEvent(feature);
                               }}
+                              onClose={()=>{
+                                const feature = new CustomEvent(
+                                  "popupclose",
+                                  {
+                                    detail: 'View',
+                                  }
+                                );
+                                window.dispatchEvent(feature);
+                              }}
                             >
                               <Button
                                 variant="ghost"

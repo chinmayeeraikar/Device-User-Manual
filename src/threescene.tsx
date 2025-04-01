@@ -32,9 +32,17 @@ function Scene() {
         console.log("Event triggered by:", event.detail.title);
       }
     };
+
+    const closeFeature = (event) => {
+      if (event && event.detail && modelRef.current) {
+        feature = (event.detail);
+        console.log("Event triggered by:", event.detail.title);
+      }
+    }
     if (modelRef.current) {
       const model = modelRef.current;
       window.addEventListener("featureSelected", featureDemo);
+      window.addEventListener("popupclose", closeFeature);
       //console.log(feature)
       if(feature == 'View'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
