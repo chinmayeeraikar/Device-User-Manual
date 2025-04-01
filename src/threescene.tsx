@@ -39,10 +39,24 @@ function Scene() {
         camera.rotation.z = 0
       }
     };
+
+    const closeFeature = (event) => {
+      if (event && event.detail && modelRef.current) {
+        feature = (event.detail);
+        console.log("Event triggered by:", event.detail.title);
+        camera.position.x = 0
+        camera.position.y = 3.061616997868383e-16
+        camera.position.z = 4
+        camera.rotation.x = -6.123233995736766e-17 
+        camera.rotation.y = 0
+        camera.rotation.z = 0
+      }
+    }
     if (modelRef.current) {
       const model = modelRef.current;
       window.addEventListener("featureSelected", featureDemo);
-      console.log('xp: ', camera.position.x, '  yp: ', camera.position.y,'  xr: ', camera.rotation.x, ' yr: ', camera.rotation.y )
+      window.addEventListener("popupclose", closeFeature);
+      //console.log(feature)
       if(feature == 'View'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
         model.rotation.x = -1.25 + (2.5/2) ;

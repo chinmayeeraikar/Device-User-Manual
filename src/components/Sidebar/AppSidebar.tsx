@@ -70,6 +70,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const handleSheetClose = () => {
     console.log("Sheet was closed, performing cleanup...");
+    const feature = new CustomEvent(
+      "popupclose",
+      {
+        detail: 'View',
+      }
+    );
+    window.dispatchEvent(feature);
+
     setSelectedItem(null);
   };
 
