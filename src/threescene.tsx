@@ -81,6 +81,11 @@ function Scene() {
         model.rotation.x = -1.25 + (2.5/2) + Math.PI/2;
         model.rotation.y = -1.5 - Math.PI/2 + (3/2) ;
         model.position.y = 0
+        model.children[0].traverse((child) => {
+          if (child.morphTargetInfluences) {
+            child.morphTargetInfluences[0] = 0;
+          }
+        });
       }
       else if(feature = 'Media'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
