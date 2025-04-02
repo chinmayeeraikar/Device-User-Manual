@@ -1,3 +1,4 @@
+import { Slider } from "@radix-ui/react-slider";
 import React from "react";
 
 export const About = () => {
@@ -20,6 +21,7 @@ export const About = () => {
           </div>
         </div>
       </div>
+      <Slider />
     </div>
   );
 };
