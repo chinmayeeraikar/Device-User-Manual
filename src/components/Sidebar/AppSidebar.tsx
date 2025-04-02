@@ -40,14 +40,14 @@ export const data = {
           url: "#",
           desc: "This is the zoom feature",
           source:
-            "https://www.youtube.com/watch?v=05VMLS2Xd0o&ab_channel=Naturein10Second",
+            "../../../assets/V1.mp4.mov",
         },
         {
           title: "Media",
           url: "#",
           desc: "To view media, press button on bottom left",
           source:
-            "https://www.youtube.com/watch?v=05VMLS2Xd0o&ab_channel=Naturein10Second",
+            "../../../assets/V1.mp4.mov",
         },
       ],
     },
