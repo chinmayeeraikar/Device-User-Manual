@@ -10,7 +10,7 @@ function Scene() {
   const gltf = useLoader(GLTFLoader, './assets/CameraBkdTex.glb');
   const modelRef = useRef(); 
   const { camera } = useThree();
-  //const controlsRef = useRef<OrbitControls | null>(null);
+  const controlsRef = useRef();
   //const controls = new OrbitControls(camera, renderer.domElement);
 
   useEffect(() => {
@@ -28,7 +28,6 @@ function Scene() {
 
   let feature = 'View'
   useFrame(({ clock }) => {
-    //console.log(camera.rotation.x, camera.rotation.y)
     const featureDemo = (event) => {
       if (event && event.detail && modelRef.current) {
         feature = (event.detail);
@@ -52,6 +51,9 @@ function Scene() {
         camera.rotation.x = -6.123233995736766e-17 
         camera.rotation.y = 0
         camera.rotation.z = 0
+        if(controlsRef.current){
+          controlsRef.current.enabled = true
+        }
       }
     }
     if (modelRef.current) {
@@ -63,7 +65,6 @@ function Scene() {
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
         model.rotation.x = -1.25 + (2.5/2) ;
         model.position.y = 1;
-        console.log(model.position.z, model.rotation.z)
         //model.children[16].rotation.y = -Math.PI;
         const time = clock.getElapsedTime();
         const morphValue = Math.abs(Math.sin(time/10));
@@ -74,10 +75,12 @@ function Scene() {
         });
       }
       else if(feature = 'Zoom'){
-        controls.enable = false
+        if(controlsRef.current){
+          controlsRef.current.enabled = false
+        }
         model.rotation.x = -1.25 + (2.5/2) + Math.PI/2;
-        model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
-        //console.log(model.rotation.x, model.rotation.y)
+        model.rotation.y = -1.5 - Math.PI/2 + (3/2) ;
+        model.position.y = 0
       }
       else if(feature = 'Media'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
@@ -99,10 +102,13 @@ function Scene() {
         ref={modelRef} 
         object={gltf.scene} 
         onClick={(e) => {
-
+          const model = modelRef.current;
           e.stopPropagation();
+          console.log()
           const obj = e.object;
-          if (obj.morphTargetInfluences) {
+          console.log(model)
+          console.log (obj)
+          if (obj!= model.children[0].children[1] && obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
             console.log(obj.name, 'Pressed');
               const butnprs = new CustomEvent("toggleActiveClass", {
@@ -112,7 +118,7 @@ function Scene() {
           }
         }}
       />
-      <OrbitControls />
+      <OrbitControls ref = {controlsRef}/>
     </>
   );
 }
