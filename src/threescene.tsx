@@ -4,6 +4,7 @@ import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Mouse } from 'lucide-react';
+import { DragControls } from 'three/addons/controls/DragControls.js';
 //import * as THREE from 'three';
 
 function Scene() {
@@ -11,7 +12,8 @@ function Scene() {
   const modelRef = useRef(); 
   const { camera } = useThree();
   const controlsRef = useRef();
-  //const controls = new OrbitControls(camera, renderer.domElement);
+  //const controls = new OrbitControls(camera, renderer.domElement);const controls = new DragControls([modelRef.current], camera, gl.domElement);
+
 
   useEffect(() => {
     if (gltf) {
@@ -30,6 +32,7 @@ function Scene() {
   useFrame(({ clock }) => {
     const featureDemo = (event) => {
       if (event && event.detail && modelRef.current) {
+        const model = modelRef.current;
         feature = (event.detail);
         console.log("Event triggered by:", event.detail.title);
         camera.position.x = 0
@@ -38,6 +41,11 @@ function Scene() {
         camera.rotation.x = -6.123233995736766e-17 
         camera.rotation.y = 0
         camera.rotation.z = 0
+        model.children[0].traverse((child) => {
+          if (child.morphTargetInfluences) {
+            child.morphTargetInfluences[0] = 0;
+          }
+        });
       }
     };
 
@@ -60,6 +68,8 @@ function Scene() {
       const model = modelRef.current;
       window.addEventListener("featureSelected", featureDemo);
       window.addEventListener("popupclose", closeFeature);
+      let drag:boolean = false 
+
       //console.log(feature)
       if(feature == 'View'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
@@ -78,14 +88,12 @@ function Scene() {
         if(controlsRef.current){
           controlsRef.current.enabled = false
         }
+        //controls.enable 
+        
         model.rotation.x = -1.25 + (2.5/2) + Math.PI/2;
         model.rotation.y = -1.5 - Math.PI/2 + (3/2) ;
         model.position.y = 0
-        model.children[0].traverse((child) => {
-          if (child.morphTargetInfluences) {
-            child.morphTargetInfluences[0] = 0;
-          }
-        });
+        
       }
       else if(feature = 'Media'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
@@ -93,6 +101,24 @@ function Scene() {
         model.position.y = 1;
       }
     }
+    const onMouseMove = ( event ) =>{
+      
+    }
+    const onMouseDown = (event) => {
+      if (feature === 'Zoom' && modelRef.current) {
+        // isDragging.current = true;
+        // dragStartPosition.current.set(event.clientX, event.clientY);
+        // previousMousePosition.current.copy(dragStartPosition.current);
+      }
+    };
+    
+    
+    const onMouseUp = () => {
+      //isDragging.current = false;
+    };
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
   });
 
   return (
@@ -111,15 +137,15 @@ function Scene() {
           e.stopPropagation();
           console.log()
           const obj = e.object;
-          console.log(model)
-          console.log (obj)
           if (obj!= model.children[0].children[1] && obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
             console.log(obj.name, 'Pressed');
+            if(feature == 'View'){
               const butnprs = new CustomEvent("toggleActiveClass", {
                 detail: obj.name
               });
               window.dispatchEvent(butnprs);
+            }
           }
         }}
       />
