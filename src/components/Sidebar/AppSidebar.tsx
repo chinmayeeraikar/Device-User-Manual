@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import SheetPopUp from "./SheetPopUp"; // Import the SheetPopUp component
-import { Slider } from "@radix-ui/react-slider";
+import { Slider } from "@/components/ui/slider";
 
 interface SidebarItem {
   title: string;

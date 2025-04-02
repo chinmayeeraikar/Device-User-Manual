@@ -59,7 +59,7 @@ import { Slider } from "@radix-ui/react-slider";
           )}
   
           <div className="mt-6">
-            <video width="100%" height="auto" controls muted className="rounded-lg">
+            <video width="100%" height="auto" controls autoPlay muted className="rounded-lg">
               <source src={selectedItem?.source} type="video/mp4" />
               Your browser does not support the video tag.
             </video>

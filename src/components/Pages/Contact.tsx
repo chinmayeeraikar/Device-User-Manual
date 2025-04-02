@@ -13,24 +13,28 @@ export const Contact = () => {
   const teamMembers = [
     {
       name: "Rewa Shete",
+      role:"Little bit of everything",
       description: "Second year engineering student.",
       imageUrl: "/api/placeholder/400/400",
       initials: "RS",
     },
     {
       name: "Chinmayee Raikar",
+      role:"Team Leader, ThreeJs expert",
       description: "Second year engineering student.",
       imageUrl: "/api/placeholder/400/400",
       initials: "CR",
     },
     {
       name: "Tanvi Yeola",
+      role : "Designer",
       description: "Second year engineering student.",
       imageUrl: "/api/placeholder/400/400",
       initials: "TY",
     },
     {
       name: "Sanika Surange",
+      role: "Frontend Developer",
       description: "Second year engineering student.",
       imageUrl: "/api/placeholder/400/400",
       initials: "SS",
