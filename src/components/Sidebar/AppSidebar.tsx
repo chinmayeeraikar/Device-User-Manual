@@ -38,7 +38,7 @@ export const data = {
         {
           title: "Zoom",
           url: "#",
-          desc: "This is the zoom feature",
+          desc: "To zoom in and out of view, rotate the rotary control to zoom. You can view demo by Dragging mouse on screen.",
           source:
             "../../../assets/V1.mp4.mov",
         },

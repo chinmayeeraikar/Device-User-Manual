@@ -25,39 +25,13 @@ const ZoomLiveAction = () => {
   // const scale = 1 + (zamt / 100);
   const scale = 1 + (zoomAmount / 100);
 
-  // Function to manually trigger zoom for testing
-  const testZoom = (amount : number) => {
-    const zoomEvent = new CustomEvent("ZOOMDemo", { detail: amount });
-    window.dispatchEvent(zoomEvent);
-  };
-
   return (
     <div className="mt-6">
-      {/* Test controls */}
-      <div className="mb-4 flex space-x-4">
-        <button 
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-          onClick={() => testZoom(0)}
-        >
-          Reset Zoom
-        </button>
-        <button 
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-          onClick={() => testZoom(50)}
-        >
-          Zoom 50%
-        </button>
-        <button 
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-          onClick={() => testZoom(100)}
-        >
-          Zoom 100%
-        </button>
-      </div>
+
       
       {/* Current zoom level display */}
       {/* <div className="mb-2">Current zoom: {zamt}%</div> */}
-      <div className="mb-2">Current zoom: {zamt}%</div>
+      {/* <div className="mb-2">Current zoom: {zoomAmount%10}%</div> */}
       
       {/* Video container */}
       <div 

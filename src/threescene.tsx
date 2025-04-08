@@ -126,9 +126,9 @@ function Scene() {
         model.rotation.x = -1.25 + (2.5/2) + Math.PI/2;
         model.rotation.y = -1.5 - Math.PI/2 + (3/2) ;
         model.position.y = 0
-        //console.log(model)
+    
         if(isDragging.current){
-          modelRef.current.children[2].rotation.y -= deltaX * 0.01;
+          modelRef.current.children[2].rotation.y -= deltaX * 0.0075;
           if(model.children[0].children[1].morphTargetInfluences[0]<1 && deltaX > 0){
             model.children[0].children[1].morphTargetInfluences[0] += deltaX*0.002
           }
@@ -176,6 +176,7 @@ function Scene() {
           e.stopPropagation();
           console.log()
           const obj = e.object;
+          console.log(obj)
           if (obj!= model.children[0].children[1] && obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
 
