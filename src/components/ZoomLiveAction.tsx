@@ -11,7 +11,7 @@ const ZoomLiveAction = () => {
     const handleLiveZoom = (event) => {
       console.log("Zoom event received with value:", event.detail);
       zamt=event.detail
-      setZoomAmount(event.detail);
+      setZoomAmount(event.detail*100);
     };
 
     window.addEventListener("ZOOMDemo", handleLiveZoom);

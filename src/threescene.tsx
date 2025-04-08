@@ -33,11 +33,11 @@ function Scene() {
   }, [gltf, camera]);
 
   const onMouseDown = (event) => {
-      isDragging.current = true;
       previousMousePosition.current = { 
         x: event.clientX, 
         y: event.clientY 
       };
+      isDragging.current = true;
   };
   const onMouseMove = (event) => {
     if (isDragging.current) {
@@ -128,17 +128,18 @@ function Scene() {
         model.position.y = 0
         //console.log(model)
         if(isDragging.current){
-          const zoom = new CustomEvent("ZOOMDemo", {
-            detail: deltaX
-           });
-          window.dispatchEvent(zoom);
           modelRef.current.children[2].rotation.y -= deltaX * 0.01;
           if(model.children[0].children[1].morphTargetInfluences[0]<1 && deltaX > 0){
-            model.children[0].children[1].morphTargetInfluences[0] += deltaX*0.001
+            model.children[0].children[1].morphTargetInfluences[0] += deltaX*0.002
           }
           else if(model.children[0].children[1].morphTargetInfluences[0]>0 && deltaX < 0){
-            model.children[0].children[1].morphTargetInfluences[0] += deltaX*0.005
+            model.children[0].children[1].morphTargetInfluences[0] += deltaX*0.002
           }
+          console.log("DeltaX: ", deltaX)
+          const zoom = new CustomEvent("ZOOMDemo", {
+            detail: model.children[0].children[1].morphTargetInfluences[0]
+           });
+          window.dispatchEvent(zoom);
         }
         if(!isDragging.current){
           modelRef.current.children[2].rotation.y = 0;
