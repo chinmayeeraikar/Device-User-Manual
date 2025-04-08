@@ -8,6 +8,7 @@
     SheetTrigger,
   } from "@/components/ui/sheet";
 import { Slider } from "@radix-ui/react-slider";
+import ZoomLiveAction from "../ZoomLiveAction";
 
   interface SheetPopUpProps {
     trigger: React.ReactNode;
@@ -58,12 +59,7 @@ import { Slider } from "@radix-ui/react-slider";
             </div>
           )}
   
-          <div className="mt-6">
-            <video width="100%" height="auto" controls autoPlay muted className="rounded-lg">
-              <source src={selectedItem?.source} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
+  <ZoomLiveAction />
         </SheetContent>
       </Sheet>
     );
