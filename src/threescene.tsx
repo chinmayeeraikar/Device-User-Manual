@@ -73,12 +73,15 @@ function Scene() {
             child.morphTargetInfluences[0] = 0;
           }
         });
+        if(controlsRef.current){
+          controlsRef.current.enabled = false
+        }
       }
     };
 
     const closeFeature = (event) => {
       if (event && event.detail && modelRef.current) {
-        feature = (event.detail);
+        feature = 'View';
         console.log("Event triggered by:", event.detail.title);
         camera.position.x = 0
         camera.position.y = 3.061616997868383e-16
@@ -95,9 +98,13 @@ function Scene() {
       const model = modelRef.current;
       window.addEventListener("featureSelected", featureDemo);
       window.addEventListener("popupclose", closeFeature); 
+      //console.log("Feature: ", feature)
 
       //console.log(feature)
       if(feature == 'View'){
+        if(controlsRef.current){
+          controlsRef.current.enabled = true
+        }
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
         model.rotation.x = -1.25 + (2.5/2) ;
         model.position.y = 1;
@@ -110,7 +117,7 @@ function Scene() {
           }
         });
       }
-      else if(feature = 'Zoom'){
+      else if(feature.title == 'Zoom'){
         if(controlsRef.current){
           controlsRef.current.enabled = false
         }
@@ -127,7 +134,7 @@ function Scene() {
           window.dispatchEvent(zoom);
           modelRef.current.children[2].rotation.y -= deltaX * 0.01;
           if(model.children[0].children[1].morphTargetInfluences[0]<1 && deltaX > 0){
-            model.children[0].children[1].morphTargetInfluences[0] += deltaX*0.005
+            model.children[0].children[1].morphTargetInfluences[0] += deltaX*0.001
           }
           else if(model.children[0].children[1].morphTargetInfluences[0]>0 && deltaX < 0){
             model.children[0].children[1].morphTargetInfluences[0] += deltaX*0.005
@@ -136,9 +143,12 @@ function Scene() {
         if(!isDragging.current){
           modelRef.current.children[2].rotation.y = 0;
         }
-        console.log(deltaX, deltaY)
       }
-      else if(feature = 'Media'){
+      else if(feature.title == 'Media'){ 
+        console.log("Media Feature")
+        if(controlsRef.current){
+          controlsRef.current.enabled = false
+        }       
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
         model.rotation.x = -1.25 + (2.5/2) ;
         model.position.y = 1;
@@ -167,8 +177,8 @@ function Scene() {
           const obj = e.object;
           if (obj!= model.children[0].children[1] && obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
-            console.log(obj.name, 'Pressed');
-            if(feature == 'View'){
+
+            if(feature === 'View'){
               const butnprs = new CustomEvent("toggleActiveClass", {
                 detail: obj.name
                });
