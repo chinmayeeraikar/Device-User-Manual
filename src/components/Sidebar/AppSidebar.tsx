@@ -84,7 +84,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader className="font-bold text-[30px] text-white">
+      <SidebarHeader className="font-bold text-[30px]  text-white">
         Camera User Manual
       </SidebarHeader>
       <SidebarContent className="gap-0">
@@ -92,7 +92,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <Collapsible
             key={item.title}
             title={item.title}
-            defaultOpen
+            defaultOpen={false}
             className="group/collapsible"
           >
             <SidebarGroup>
