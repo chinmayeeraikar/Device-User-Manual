@@ -1,17 +1,21 @@
 // MyThreeScene.tsx
+
 import React, { useRef, useEffect } from 'react';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Mouse } from 'lucide-react';
-import { DragControls } from 'three/addons/controls/DragControls.js';
 //import * as THREE from 'three';
 
 function Scene() {
-  const gltf = useLoader(GLTFLoader, './assets/CameraBkdTex.glb');
+  const gltf = useLoader(GLTFLoader, './assets/CameraFinal.glb');
   const modelRef = useRef(); 
   const { camera } = useThree();
   const controlsRef = useRef();
+  const previousMousePosition = useRef({ x: 0, y: 0 });
+  const isDragging = useRef(false);
+  let deltaX  : number = 0
+  let deltaY : number = 0
   //const controls = new OrbitControls(camera, renderer.domElement);const controls = new DragControls([modelRef.current], camera, gl.domElement);
 
 
@@ -28,6 +32,29 @@ function Scene() {
     camera.position.z = 5;
   }, [gltf, camera]);
 
+  const onMouseDown = (event) => {
+      isDragging.current = true;
+      previousMousePosition.current = { 
+        x: event.clientX, 
+        y: event.clientY 
+      };
+  };
+  const onMouseMove = (event) => {
+    if (isDragging.current) {
+      // Calculate mouse movement delta
+      deltaX = event.clientX - previousMousePosition.current.x;
+      deltaY = event.clientY - previousMousePosition.current.y;
+      
+      // Update the model's child rotation
+      previousMousePosition.current = { 
+        x: event.clientX, 
+        y: event.clientY 
+      };
+    }
+  }
+  const onMouseUp = () => {
+    isDragging.current = false;
+  };
   let feature = 'View'
   useFrame(({ clock }) => {
     const featureDemo = (event) => {
@@ -67,8 +94,7 @@ function Scene() {
     if (modelRef.current) {
       const model = modelRef.current;
       window.addEventListener("featureSelected", featureDemo);
-      window.addEventListener("popupclose", closeFeature);
-      let drag:boolean = false 
+      window.addEventListener("popupclose", closeFeature); 
 
       //console.log(feature)
       if(feature == 'View'){
@@ -93,7 +119,20 @@ function Scene() {
         model.rotation.x = -1.25 + (2.5/2) + Math.PI/2;
         model.rotation.y = -1.5 - Math.PI/2 + (3/2) ;
         model.position.y = 0
-        
+        //console.log(model)
+        if(isDragging.current){
+          modelRef.current.children[2].rotation.y -= deltaX * 0.01;
+          if(model.children[0].children[1].morphTargetInfluences[0]<1 && deltaX > 0){
+            model.children[0].children[1].morphTargetInfluences[0] += deltaX*0.005
+          }
+          else if(model.children[0].children[1].morphTargetInfluences[0]>0 && deltaX < 0){
+            model.children[0].children[1].morphTargetInfluences[0] += deltaX*0.005
+          }
+        }
+        if(!isDragging.current){
+          modelRef.current.children[2].rotation.y = 0;
+        }
+        console.log(deltaX, deltaY)
       }
       else if(feature = 'Media'){
         model.rotation.y = -(-1.5 + Math.PI/2 + (3/2) );
@@ -101,21 +140,6 @@ function Scene() {
         model.position.y = 1;
       }
     }
-    const onMouseMove = ( event ) =>{
-      
-    }
-    const onMouseDown = (event) => {
-      if (feature === 'Zoom' && modelRef.current) {
-        // isDragging.current = true;
-        // dragStartPosition.current.set(event.clientX, event.clientY);
-        // previousMousePosition.current.copy(dragStartPosition.current);
-      }
-    };
-    
-    
-    const onMouseUp = () => {
-      //isDragging.current = false;
-    };
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseup', onMouseUp);
@@ -143,7 +167,7 @@ function Scene() {
             if(feature == 'View'){
               const butnprs = new CustomEvent("toggleActiveClass", {
                 detail: obj.name
-              });
+               });
               window.dispatchEvent(butnprs);
             }
           }
