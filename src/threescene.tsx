@@ -177,11 +177,11 @@ function Scene() {
           const model = modelRef.current;
           e.stopPropagation();
           const obj = e.object;
-          window.addEventListener('mousedown', onMouseDown);
-          window.addEventListener('mouseup', onMouseUp);
+          //window.addEventListener('mousedown', onMouseDown);
+          //window.addEventListener('mouseup', onMouseUp);
           if (obj!= model.children[0].children[1] && obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
-
+            console.log(obj.name, "pressed")
             if(feature === 'View'){
               const butnprs = new CustomEvent("toggleActiveClass", {
                 detail: obj.name

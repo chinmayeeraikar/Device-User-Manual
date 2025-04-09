@@ -18,8 +18,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import SheetPopUp from "./SheetPopUp"; // Import the SheetPopUp component
-//import { Slider } from "@/components/ui/slider";
+import SheetPopUp from "./SheetPopUp";
 
 interface SidebarItem {
   title: string;
@@ -40,14 +39,14 @@ export const data = {
           url: "#",
           desc: "To zoom in and out of view, rotate the rotary control to zoom. You can view demo by Dragging mouse on screen.",
           source:
-            "../../../assets/V1.mp4.mov",
+            "ZoomLiveAction",
         },
         {
           title: "Media",
           url: "#",
           desc: "To view media, press button on bottom left",
           source:
-            "../../../assets/V1.mp4.mov",
+            "ZoomLiveAction",
         },
       ],
     },
