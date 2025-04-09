@@ -5,6 +5,7 @@ import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Mouse } from 'lucide-react';
+import { is } from '@react-three/fiber/dist/declarations/src/core/utils';
 //import * as THREE from 'three';
 
 function Scene() {
@@ -38,6 +39,7 @@ function Scene() {
         y: event.clientY 
       };
       isDragging.current = true;
+      console.log("Clicked")
   };
   const onMouseMove = (event) => {
     if (isDragging.current) {
@@ -54,6 +56,7 @@ function Scene() {
   }
   const onMouseUp = () => {
     isDragging.current = false;
+    console.log("mouse released.")
   };
   let feature = 'View'
   useFrame(({ clock }) => {
@@ -100,7 +103,6 @@ function Scene() {
       window.addEventListener("popupclose", closeFeature); 
       //console.log("Feature: ", feature)
 
-      //console.log(feature)
       if(feature == 'View'){
         if(controlsRef.current){
           controlsRef.current.enabled = true
@@ -174,17 +176,36 @@ function Scene() {
         onClick={(e) => {
           const model = modelRef.current;
           e.stopPropagation();
-          console.log()
           const obj = e.object;
-          console.log(obj)
+          window.addEventListener('mousedown', onMouseDown);
+          window.addEventListener('mouseup', onMouseUp);
           if (obj!= model.children[0].children[1] && obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
 
             if(feature === 'View'){
               const butnprs = new CustomEvent("toggleActiveClass", {
                 detail: obj.name
-               });
+              });
               window.dispatchEvent(butnprs);
+            }
+            if(feature = 'Media'){
+              console.log(isDragging.current)
+              if(isDragging.current){
+                obj.morphTargetInfluences[0] = 1
+              }
+              else{
+                obj.morphTargetInfluences[0] = 0
+              }
+              if(obj === model.children[3]){
+                const showmedia = new CustomEvent("ShowMedia")
+                window.dispatchEvent(showmedia)
+              }
+              else if(obj === model.children[13] || obj === model.children[11]){
+                const chngmedia = new CustomEvent("ChangeMedia", {
+                  detail: obj.title
+                })
+                window.dispatchEvent(chngmedia)
+              }
             }
           }
         }}
