@@ -179,12 +179,23 @@ function Scene() {
           console.log(obj)
           if (obj!= model.children[0].children[1] && obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
-
             if(feature === 'View'){
               const butnprs = new CustomEvent("toggleActiveClass", {
                 detail: obj.name
                });
               window.dispatchEvent(butnprs);
+            }
+            if(feature = 'Media'){
+              if(obj === model.children[3]){
+                const showmedia = new CustomEvent("ShowMedia")
+                window.dispatchEvent(showmedia)
+              }
+              else if(obj === model.children[13] || obj === model.children[11]){
+                const chngmedia = new CustomEvent("ChangeMedia", {
+                  detail: obj.title
+                })
+                window.dispatchEvent(chngmedia)
+              }
             }
           }
         }}
