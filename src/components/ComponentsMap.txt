@@ -1,0 +1,4 @@
+import React from 'react';
+
+export const ZoomLiveAction = () => <div>Login Component</div>;
+export const MediaGallery = () => <div>Dashboard Component</div>;
