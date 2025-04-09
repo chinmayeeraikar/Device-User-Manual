@@ -30,6 +30,7 @@ const ZoomLiveAction: React.FC = () => {
           width="100%"
           height="auto"
           controls
+          loop
           autoPlay
           muted
           style={{

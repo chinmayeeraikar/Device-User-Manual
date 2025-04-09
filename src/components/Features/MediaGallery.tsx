@@ -1,27 +1,31 @@
-import React from 'react';
-import { EmblaOptionsType } from 'embla-carousel';
-import useEmblaCarousel from 'embla-carousel-react';
-
-export type PropType = {
-  slides: number[];
-  options?: EmblaOptionsType;
-};
+import React from "react";
+import { EmblaOptionsType } from "embla-carousel";
+import useEmblaCarousel from "embla-carousel-react";
 
 const MediaGallery: React.FC = () => {
-  const slides = [1, 2, 3, 4]; // use images or slide data here
+  // 🖼️ Add your own images here
+  const imageUrls = [
+    "../../../assets/gallery/img1.jpeg",
+    "../../../assets/gallery/img2.jpeg",
+    "../../../assets/gallery/img3.jpeg",
+    "../../../assets/gallery/img4.jpeg",
+    "../../../assets/gallery/img5.jpeg",
+    "../../../assets/gallery/img6.jpeg", 
+  ];
+
   const options: EmblaOptionsType = { loop: true };
   const [emblaRef] = useEmblaCarousel(options);
 
   return (
-    <section className="embla">
+    <section className="overflow-hidden">
       <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
-          {slides.map((index) => (
-            <div className="embla__slide" key={index}>
+        <div className="flex transition-transform duration-300 ease-in-out">
+          {imageUrls.map((url, index) => (
+            <div className="flex-[0_0_100%] px-2" key={index}>
               <img
-                src={`/images/slide-${index}.jpg`} // Put your actual images here
-                alt={`Slide ${index}`}
-                className="w-full h-auto object-cover"
+                src={url}
+                alt={`Slide ${index + 1}`}
+                className="w-full h-auto rounded-lg object-cover"
               />
             </div>
           ))}
