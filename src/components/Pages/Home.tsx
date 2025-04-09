@@ -1,7 +1,7 @@
 import MyThreeScene from "@/threescene.tsx";
 import { AppSidebar } from "../Sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "../ui/sidebar";
-import YourComponent from "../ButtonInfoPopUp.tsx";
+import YourComponent from "../Features/ButtonInfoPopUp";
 
 export const Home = () => {
   return (
