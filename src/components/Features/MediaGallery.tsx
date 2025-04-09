@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 
@@ -16,7 +16,21 @@ const MediaGallery: React.FC = () => {
   const options: EmblaOptionsType = { loop: true };
   const [emblaRef] = useEmblaCarousel(options);
 
+    const [zoomAmount, setZoomAmount] = useState(0);
+    const videoRef = useRef(null);
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+      const handleMedia = (event) => {
+        setZoomAmount(event.detail * 100);
+      };
+
+  window.addEventListener("ChangeMedia", handleMedia);
+    return () => window.removeEventListener("ChangeMedia", handleMedia);
+  }, []);
+
   return (
+    <div>
     <section className="overflow-hidden">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="flex transition-transform duration-300 ease-in-out">
@@ -32,6 +46,7 @@ const MediaGallery: React.FC = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 
