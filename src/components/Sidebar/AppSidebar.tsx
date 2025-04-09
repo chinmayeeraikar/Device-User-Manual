@@ -46,7 +46,11 @@ export const data = {
           url: "#",
           desc: "To view media, press button on bottom left",
           source:
+<<<<<<< HEAD
             "ZoomLiveAction",
+=======
+            "MediaGallery",
+>>>>>>> ab3953bdbf3144604b0515f17eb8fb1c45dcde4e
         },
       ],
     },
