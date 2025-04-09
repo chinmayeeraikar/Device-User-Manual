@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import SheetPopUp from "./SheetPopUp"; // Import the SheetPopUp component
-import { Slider } from "@/components/ui/slider";
+//import { Slider } from "@/components/ui/slider";
 
 interface SidebarItem {
   title: string;
@@ -134,7 +134,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             </SidebarMenuButton>
                           }
                           selectedItem={selectedItem}
-                          sliderComponent={subItem.title === 'Zoom' ? <Slider /> : null}
+                         // sliderComponent={subItem.title === 'Zoom' ? <Slider /> : null}
                           onClose={handleSheetClose}
                         />
                       </SidebarMenuItem>
