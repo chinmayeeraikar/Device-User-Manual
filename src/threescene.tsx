@@ -174,9 +174,7 @@ function Scene() {
         onClick={(e) => {
           const model = modelRef.current;
           e.stopPropagation();
-          console.log()
           const obj = e.object;
-          console.log(obj)
           if (obj!= model.children[0].children[1] && obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
             if(feature === 'View'){
@@ -185,7 +183,8 @@ function Scene() {
                });
               window.dispatchEvent(butnprs);
             }
-            if(feature = 'Media'){
+            if(feature === 'Media'){
+              console.log("InMediaFeature")
               if(obj === model.children[3]){
                 const showmedia = new CustomEvent("ShowMedia")
                 window.dispatchEvent(showmedia)
