@@ -30,29 +30,30 @@ export const SheetPopUp = ({
   const [isOpen, setIsOpen] = useState(false);
   const [triggerElement, setTriggerElement] = useState<string | null>(null);
   const [showMedia, setShowMedia] = useState(false);
-  const [mediaDirection, setMediaDirection] = useState<"left" | "right" | null>(null);
+  const [mediaDirection, setMediaDirection] = useState<"Left" | "Right" | null>(null);
 
   useEffect(() => {
     const handleCustomEvent = (event: Event) => {
       const customEvent = event as CustomEvent;
-
+      console.log(event)
       switch (event.type) {
-        case "ZOOMDemo":
+        case 'ZOOMDemo':
           setTriggerElement("ZOOMDemo");
           setIsOpen(true);
           break;
 
-        case "ShowMedia":
+        case 'ShowMedia':
           setShowMedia(true); // Display carousel
           setTriggerElement("ChangeMedia"); // So gallery renders
           setIsOpen(true);
           break;
 
-        case "ChangeMedia":
-          if (customEvent.detail === "left" || customEvent.detail === "right") {
+        case 'ChangeMedia':
+          if (customEvent.detail === "Left" || customEvent.detail === "Right") {
             setMediaDirection(customEvent.detail); // Pass direction to gallery
             setTriggerElement("ChangeMedia");
             setIsOpen(true);
+            console.log(mediaDirection)
           }
           break;
 
@@ -61,21 +62,22 @@ export const SheetPopUp = ({
       }
     };
 
-    window.addEventListener("ZOOMDemo", handleCustomEvent);
-    window.addEventListener("ShowMedia", handleCustomEvent);
-    window.addEventListener("ChangeMedia", handleCustomEvent);
+    window.addEventListener("featureSelected", handleCustomEvent)
+    window.addEventListener('ZOOMDemo', handleCustomEvent);
+    window.addEventListener('ShowMedia', handleCustomEvent);
+    window.addEventListener('ChangeMedia', handleCustomEvent);
 
     return () => {
-      window.removeEventListener("ZOOMDemo", handleCustomEvent);
-      window.removeEventListener("ShowMedia", handleCustomEvent);
-      window.removeEventListener("ChangeMedia", handleCustomEvent);
+      window.removeEventListener('ZOOMDemo', handleCustomEvent);
+      window.removeEventListener('ShowMedia', handleCustomEvent);
+      window.removeEventListener('ChangeMedia', handleCustomEvent);
     };
   }, []);
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
     if (!open) {
-      onClose?.();
+      //onClose?.();
       setTriggerElement(null);
       setShowMedia(false);
       setMediaDirection(null);

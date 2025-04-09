@@ -137,7 +137,7 @@ function Scene() {
           modelRef.current.children[2].rotation.y = 0;
         }
       } else if (feature.title == 'Media') {
-        console.log("Media Feature");
+        //console.log("Media Feature");
         if (controlsRef.current) {
           controlsRef.current.enabled = false;
         }
@@ -167,6 +167,8 @@ function Scene() {
           const model = modelRef.current;
           e.stopPropagation();
           const obj = e.object;
+          console.log(obj)
+          console.log(model)
           if (obj != model.children[0].children[1] && obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
             if (feature === 'View') {
@@ -175,16 +177,16 @@ function Scene() {
               });
               window.dispatchEvent(butnprs);
             }
-            if (feature === 'Media') {
-              console.log("InMediaFeature");
+            if (feature.title == 'Media') {
               if (obj === model.children[3]) {
-                const showmedia = new CustomEvent("ShowMedia");
+                const showmedia = new CustomEvent('ShowMedia');
                 window.dispatchEvent(showmedia);
               } else if (obj === model.children[13] || obj === model.children[11]) {
-                const chngmedia = new CustomEvent("ChangeMedia", {
-                  detail: obj.title
+                const chngmedia = new CustomEvent('ChangeMedia', {
+                  detail: obj.name
                 });
                 window.dispatchEvent(chngmedia);
+                console.log(obj.name, " event dipatched")
               }
             }
           }

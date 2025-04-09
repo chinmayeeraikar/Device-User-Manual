@@ -10,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 interface MediaGalleryProps {
   showMedia: boolean;
-  mediaDirection: "left" | "right" | null;
+  mediaDirection: "Left" | "Right" | null;
 }
 
 const MediaGallery = ({ showMedia, mediaDirection }: MediaGalleryProps) => {
@@ -27,10 +27,11 @@ const MediaGallery = ({ showMedia, mediaDirection }: MediaGalleryProps) => {
   const totalImages = imageUrls.length;
 
   useEffect(() => {
+    console.log(mediaDirection)
     if (!mediaDirection) return;
 
     setCurrentIndex((prevIndex) => {
-      if (mediaDirection === "left") {
+      if (mediaDirection === "Left") {
         return (prevIndex - 1 + totalImages) % totalImages;
       } else {
         return (prevIndex + 1) % totalImages;

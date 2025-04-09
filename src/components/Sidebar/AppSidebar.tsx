@@ -133,7 +133,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             </SidebarMenuButton>
                           }
                           selectedItem={selectedItem}
-                          //sliderComponent={subItem.title === 'Zoom' ? <Slider /> : null}
                           onClose={handleSheetClose}
                         />
                       </SidebarMenuItem>
