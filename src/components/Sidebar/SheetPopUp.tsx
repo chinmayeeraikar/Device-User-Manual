@@ -40,7 +40,7 @@ export const SheetPopUp = ({
       switch (event.type) {
         case 'ZOOMDemo':
           setTriggerElement("ZOOMDemo");
-          setIsOpen(true);
+          //setIsOpen(true);
           break;
 
         case 'ShowMedia':
