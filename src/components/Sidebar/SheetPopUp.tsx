@@ -31,6 +31,7 @@ export const SheetPopUp = ({
   const [triggerElement, setTriggerElement] = useState<string | null>(null);
   const [showMedia, setShowMedia] = useState(false);
   const [mediaDirection, setMediaDirection] = useState<"Left" | "Right" | null>(null);
+  const [mediaChangeCounter, setMediaChangeCounter] = useState(0);
 
   useEffect(() => {
     const handleCustomEvent = (event: Event) => {
@@ -43,16 +44,22 @@ export const SheetPopUp = ({
           break;
 
         case 'ShowMedia':
-          setShowMedia(true); // Display carousel
+          setShowMedia(!showMedia); // Display carousel
+          console.log(showMedia)
           setTriggerElement("ChangeMedia"); // So gallery renders
-          setIsOpen(true);
+          if(!showMedia){
+            setMediaDirection(null);
+          }
+          else{
+            setMediaDirection("Right");
+          }
           break;
 
         case 'ChangeMedia':
           if (customEvent.detail === "Left" || customEvent.detail === "Right") {
             setMediaDirection(customEvent.detail); // Pass direction to gallery
             setTriggerElement("ChangeMedia");
-            setIsOpen(true);
+            setMediaChangeCounter(prev => prev + 1);
             console.log(mediaDirection)
           }
           break;
@@ -72,7 +79,7 @@ export const SheetPopUp = ({
       window.removeEventListener('ShowMedia', handleCustomEvent);
       window.removeEventListener('ChangeMedia', handleCustomEvent);
     };
-  }, []);
+  }, [mediaChangeCounter]);
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
@@ -89,10 +96,12 @@ export const SheetPopUp = ({
       case "ZOOMDemo":
         return <ZoomLiveAction />;
       case "ChangeMedia":
+        console.log("ChangeMedia:", mediaDirection)
         return (
           <MediaGallery
             showMedia={showMedia}
             mediaDirection={mediaDirection}
+            changeCounter={mediaChangeCounter}
           />
         );
       default:

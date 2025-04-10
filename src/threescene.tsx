@@ -167,8 +167,8 @@ function Scene() {
           const model = modelRef.current;
           e.stopPropagation();
           const obj = e.object;
-          console.log(obj)
-          console.log(model)
+          //console.log(obj)
+          //console.log(model)
           if (obj != model.children[0].children[1] && obj.morphTargetInfluences) {
             obj.morphTargetInfluences[0] = obj.morphTargetInfluences[0] === 1 ? 0 : 1;
             if (feature === 'View') {

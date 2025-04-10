@@ -11,9 +11,10 @@ import { Card, CardContent } from "@/components/ui/card";
 interface MediaGalleryProps {
   showMedia: boolean;
   mediaDirection: "Left" | "Right" | null;
+  changeCounter?:number;
 }
 
-const MediaGallery = ({ showMedia, mediaDirection }: MediaGalleryProps) => {
+const MediaGallery = ({ showMedia, mediaDirection, changeCounter = 0 }: MediaGalleryProps) => {
   const imageUrls = [
     "../../../assets/Gallery/img1.jpeg",
     "../../../assets/Gallery/img2.jpeg",
@@ -25,21 +26,24 @@ const MediaGallery = ({ showMedia, mediaDirection }: MediaGalleryProps) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalImages = imageUrls.length;
+  changeCounter +=1
 
   useEffect(() => {
     console.log(mediaDirection)
     if (!mediaDirection) return;
-
-    setCurrentIndex((prevIndex) => {
+    console.log("NextImage:", mediaDirection)
+    setCurrentIndex((currentIndex) => {
+      console.log("NextImage:", mediaDirection)
       if (mediaDirection === "Left") {
-        return (prevIndex - 1 + totalImages) % totalImages;
+        return (currentIndex - 1 + totalImages) % totalImages;
       } else {
-        return (prevIndex + 1) % totalImages;
+        return (currentIndex + 1) % totalImages;
       }
     });
-  }, [mediaDirection, totalImages]);
+  }, [mediaDirection, totalImages, changeCounter]);
 
   if (!showMedia) {
+    console.log("not showMedia")
     return <div className="w-full h-60 bg-black rounded-xl" />;
   }
 
