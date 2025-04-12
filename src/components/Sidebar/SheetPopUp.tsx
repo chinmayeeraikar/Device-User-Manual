@@ -69,7 +69,6 @@ export const SheetPopUp = ({
       }
     };
 
-    window.addEventListener("featureSelected", handleCustomEvent)
     window.addEventListener('ZOOMDemo', handleCustomEvent);
     window.addEventListener('ShowMedia', handleCustomEvent);
     window.addEventListener('ChangeMedia', handleCustomEvent);

@@ -5,6 +5,7 @@ import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Mouse } from 'lucide-react';
+import { DirectionalLight } from 'three';
 
 function Scene() {
   const gltf = useLoader(GLTFLoader, './assets/CameraFinal.glb');
@@ -158,7 +159,9 @@ function Scene() {
       <directionalLight position={[2, 2, 5]} castShadow intensity={1} />
       <directionalLight position={[-2, 2, -5]} castShadow intensity={1} />
       <directionalLight position={[4, 2, 4]} intensity={1} />
-      <ambientLight position={[5, 5, 5]} intensity={1} />
+      {/* <ambientLight position={[5, 5, 5]} intensity={1} /> */}
+      <directionalLight position={[0, 0, -2]} intensity={1} />
+      <directionalLight position={[0, 4, -2]} intensity={1} />
 
       <primitive
         ref={modelRef}

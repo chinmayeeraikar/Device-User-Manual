@@ -44,7 +44,7 @@ export const data = {
         {
           title: "Media",
           url: "#",
-          desc: "To view media, press button on bottom left",
+          desc: "To view media, press button on bottom left (▶️). To navigate through the gallery, press the side keys.",
           source:
             "../../../assets/V1.mp4.mov",
         },

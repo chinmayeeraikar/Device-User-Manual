@@ -5,12 +5,11 @@ const ZoomLiveAction = () => {
   const videoRef = useRef(null);
   const containerRef = useRef(null);
 
-  let zamt=0;
   
   useEffect(() => {
     const handleLiveZoom = (event) => {
       console.log("Zoom event received with value:", event.detail);
-      zamt=event.detail
+      //zamt=event.detail
       setZoomAmount(event.detail*100);
     };
 
@@ -29,9 +28,6 @@ const ZoomLiveAction = () => {
     <div className="mt-6">
 
       
-      {/* Current zoom level display */}
-      {/* <div className="mb-2">Current zoom: {zamt}%</div> */}
-      {/* <div className="mb-2">Current zoom: {zoomAmount%10}%</div> */}
       
       {/* Video container */}
       <div 
