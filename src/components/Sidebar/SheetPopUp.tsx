@@ -7,7 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import ZoomLiveAction from "../Features/ZoomLiveAction"
+import ZoomLiveAction from "../Features/ZoomLiveAction";
 import MediaGallery from "../Features/MediaGallery";
 
 interface SheetPopUpProps {
@@ -19,6 +19,7 @@ interface SheetPopUpProps {
   } | null;
   sliderComponent?: React.ReactNode;
   onClose?: () => void;
+  setIsOpen: (open: boolean) => void;
 }
 
 export const SheetPopUp = ({
@@ -26,8 +27,9 @@ export const SheetPopUp = ({
   selectedItem,
   onClose,
   sliderComponent,
+  setIsOpen,
 }: SheetPopUpProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenLocal, setIsOpenLocal] = useState(false);
   const [triggerElement, setTriggerElement] = useState<string | null>(null);
   const [showMedia, setShowMedia] = useState(false);
   const [mediaDirection, setMediaDirection] = useState<"Left" | "Right" | null>(null);
@@ -37,50 +39,40 @@ export const SheetPopUp = ({
     const handleCustomEvent = (event: Event) => {
       const customEvent = event as CustomEvent;
       switch (event.type) {
-        case 'ZOOMDemo':
+        case "ZOOMDemo":
           setTriggerElement("ZOOMDemo");
-          //setIsOpen(true);
           break;
-
-        case 'ShowMedia':
-          setShowMedia(!showMedia); // Display carousel
-          console.log(showMedia)
-          setTriggerElement("ChangeMedia"); // So gallery renders
-          if(!showMedia){
-            setMediaDirection(null);
-          }
-          else{
-            setMediaDirection("Right");
-          }
+        case "ShowMedia":
+          setShowMedia(!showMedia);
+          setTriggerElement("ChangeMedia");
+          setMediaDirection(showMedia ? null : "Right");
           break;
-
-        case 'ChangeMedia':
+        case "ChangeMedia":
           if (customEvent.detail === "Left" || customEvent.detail === "Right") {
-            setMediaDirection(customEvent.detail); // Pass direction to gallery
+            setMediaDirection(customEvent.detail);
             setTriggerElement("ChangeMedia");
-            setMediaChangeCounter(prev => prev + 1);
-            console.log(mediaDirection)
+            setMediaChangeCounter((prev) => prev + 1);
           }
           break;
-
         default:
           break;
       }
     };
 
-    window.addEventListener('ZOOMDemo', handleCustomEvent);
-    window.addEventListener('ShowMedia', handleCustomEvent);
-    window.addEventListener('ChangeMedia', handleCustomEvent);
+    window.addEventListener("ZOOMDemo", handleCustomEvent);
+    window.addEventListener("ShowMedia", handleCustomEvent);
+    window.addEventListener("ChangeMedia", handleCustomEvent);
 
     return () => {
-      window.removeEventListener('ZOOMDemo', handleCustomEvent);
-      window.removeEventListener('ShowMedia', handleCustomEvent);
-      window.removeEventListener('ChangeMedia', handleCustomEvent);
+      window.removeEventListener("ZOOMDemo", handleCustomEvent);
+      window.removeEventListener("ShowMedia", handleCustomEvent);
+      window.removeEventListener("ChangeMedia", handleCustomEvent);
     };
-  }, [mediaChangeCounter]);
+  }, [mediaChangeCounter, showMedia]);
 
   const handleOpenChange = (open: boolean) => {
-    setIsOpen(open);
+    setIsOpenLocal(open);
+    setIsOpen(open); // Sync with AppSidebar
     if (!open) {
       onClose?.();
       setTriggerElement(null);
@@ -94,7 +86,6 @@ export const SheetPopUp = ({
       case "ZOOMDemo":
         return <ZoomLiveAction />;
       case "ChangeMedia":
-        console.log("ChangeMedia:", mediaDirection)
         return (
           <MediaGallery
             showMedia={showMedia}
@@ -108,7 +99,7 @@ export const SheetPopUp = ({
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
+    <Sheet open={isOpenLocal} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent side="right" className="w-[400px] sm:w-[540px]">
         <SheetHeader>
