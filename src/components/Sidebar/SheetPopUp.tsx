@@ -19,6 +19,7 @@ interface SheetPopUpProps {
   } | null;
   sliderComponent?: React.ReactNode;
   onClose?: () => void;
+  setIsOpen: (open: boolean) => void;
 }
 
 export const SheetPopUp = ({
@@ -26,8 +27,9 @@ export const SheetPopUp = ({
   selectedItem,
   onClose,
   sliderComponent,
+  setIsOpen,
 }: SheetPopUpProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenLocal, setIsOpenLocal] = useState(false);
   const [triggerElement, setTriggerElement] = useState<string | null>(null);
   const [showMedia, setShowMedia] = useState(false);
   const [mediaDirection, setMediaDirection] = useState<"Left" | "Right" | null>(null);
@@ -36,10 +38,10 @@ export const SheetPopUp = ({
   useEffect(() => {
     const handleCustomEvent = (event: Event) => {
       const customEvent = event as CustomEvent;
+      console.log(event)
       switch (event.type) {
         case 'ZOOMDemo':
           setTriggerElement("ZOOMDemo");
-          //setIsOpen(true);
           break;
 
         case 'ShowMedia':
@@ -80,12 +82,14 @@ export const SheetPopUp = ({
   }, [mediaChangeCounter]);
 
   const handleOpenChange = (open: boolean) => {
+    setIsOpenLocal(open);
     setIsOpen(open);
+    console.log(open)
     if (!open) {
-      onClose?.();
       setTriggerElement(null);
       setShowMedia(false);
       setMediaDirection(null);
+      onClose?.();
     }
   };
 
@@ -111,7 +115,7 @@ export const SheetPopUp = ({
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
+    <Sheet open={isOpenLocal} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent side="right" className="w-[400px] sm:w-[540px]">
         <SheetHeader>
