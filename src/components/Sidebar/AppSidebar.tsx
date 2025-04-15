@@ -76,8 +76,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         detail: 'View',
       }
     );
+    console.log("CloseDispatched")
     window.dispatchEvent(feature);
-
     setSelectedItem(null);
   };
 

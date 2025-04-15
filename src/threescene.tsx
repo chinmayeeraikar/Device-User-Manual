@@ -89,6 +89,7 @@ function Scene() {
         if (controlsRef.current) {
           controlsRef.current.enabled = true;
         }
+        console.log("Close Listened")
       }
     };
 
@@ -127,7 +128,7 @@ function Scene() {
           } else if (model.children[0].children[1].morphTargetInfluences[0] > 0 && deltaX < 0) {
             model.children[0].children[1].morphTargetInfluences[0] += deltaX * 0.002;
           }
-          console.log("DeltaX: ", deltaX);
+          //console.log("DeltaX: ", deltaX);
           const zoom = new CustomEvent("ZOOMDemo", {
             detail: model.children[0].children[1].morphTargetInfluences[0]
           });

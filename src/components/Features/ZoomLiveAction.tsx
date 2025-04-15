@@ -8,8 +8,7 @@ const ZoomLiveAction = () => {
   
   useEffect(() => {
     const handleLiveZoom = (event) => {
-      console.log("Zoom event received with value:", event.detail);
-      //zamt=event.detail
+      //console.log("Zoom event received with value:", event.detail);
       setZoomAmount(event.detail*100);
     };
 
