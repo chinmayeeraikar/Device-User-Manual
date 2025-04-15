@@ -20,12 +20,12 @@ import {
 import { Button } from "@/components/ui/button";
 import SheetPopUp from "./SheetPopUp"; // Import the SheetPopUp component
 
-interface SidebarItem {
-  title: string;
-  url: string;
-  desc: string;
-  source: string;
-}
+// interface SidebarItem {
+//   title: string;
+//   url: string;
+//   desc: string;
+//   source: string;
+// }
 
 // Sample data
 export const data = {
@@ -39,14 +39,16 @@ export const data = {
           url: "#",
           desc: "To zoom in and out of view, rotate the rotary control to zoom. You can view demo by Dragging mouse on screen.",
           source:
-            "../../../assets/V1.mp4.mov",
+            // "../../../assets/V1.mp4.mov",
+            "../../../assets/blackrect.jpg"
         },
         {
           title: "Media",
           url: "#",
           desc: "To view media, press button on bottom left (▶️). To navigate through the gallery, press the side keys.",
           source:
-            "../../../assets/V1.mp4.mov",
+            // "../../../assets/V1.mp4.mov",
+            "../../../assets/blackrect.jpg"
         },
       ],
     },
@@ -60,13 +62,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     source: string;
   } | null>(null);
 
-  const handleItemSelect = () => {
-    setSelectedItem({
-      title: "Sample Video",
-      desc: "This is a description of the video",
-      source: "/path/to/your/video.mp4",
-    });
-  };
+  // const handleItemSelect = () => {
+  //   setSelectedItem({
+  //     title: "Sample Video",
+  //     desc: "This is a description of the video",
+  //     source: "/path/to/your/video.mp4",
+  //   });
+  // };
 
   const handleSheetClose = () => {
     console.log("Sheet was closed, performing cleanup...");
@@ -82,11 +84,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   };
 
   return (
-    <Sidebar {...props}>
-      <SidebarHeader className="font-bold text-[30px]  text-white">
+    <Sidebar {...props} className="relative">
+      <SidebarHeader className="font-bold bg-[#1f5156] text-[30px] text-white">
         Camera User Manual
       </SidebarHeader>
-      <SidebarContent className="gap-0">
+      <SidebarContent className="gap-0 bg-[#1f5156]">
         {data.navMain.map((item) => (
           <Collapsible
             key={item.title}
@@ -123,6 +125,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 );
                                 window.dispatchEvent(feature);
                               }}
+                              className="font-normal"
                             >
                               <Button
                                 variant="ghost"
@@ -143,6 +146,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarGroup>
           </Collapsible>
         ))}
+
+        <div className="absolute bottom-1/6 text-stone-50">
+          <p>Drag mouse to view model, press camera buttons to view their functions</p>
+        </div>
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

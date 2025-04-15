@@ -83,7 +83,7 @@ export const SheetPopUp = ({
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
     if (!open) {
-      //onClose?.();
+      onClose?.();
       setTriggerElement(null);
       setShowMedia(false);
       setMediaDirection(null);
@@ -124,7 +124,7 @@ export const SheetPopUp = ({
           </SheetDescription>
         </SheetHeader>
 
-        {sliderComponent && <div className="my-4">{sliderComponent}</div>}
+        {/* {sliderComponent && <div className="my-4">{sliderComponent}</div>} */}
 
         <div>{renderContentBasedOnTrigger()}</div>
       </SheetContent>
