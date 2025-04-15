@@ -61,14 +61,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     desc: string;
     source: string;
   } | null>(null);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
-  // const handleItemSelect = () => {
-  //   setSelectedItem({
-  //     title: "Sample Video",
-  //     desc: "This is a description of the video",
-  //     source: "/path/to/your/video.mp4",
-  //   });
-  // };
+  const handleItemSelect = () => {
+    setSelectedItem({
+      title: "Sample Video",
+      desc: "This is a description of the video",
+      source: "/path/to/your/video.mp4",
+    });
+  };
 
   const handleSheetClose = () => {
     console.log("Sheet was closed, performing cleanup...");
@@ -78,14 +79,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         detail: 'View',
       }
     );
-    console.log("CloseDispatched")
     window.dispatchEvent(feature);
+    setIsSheetOpen(false);
     setSelectedItem(null);
   };
 
   return (
-    <Sidebar {...props} className="relative">
-      <SidebarHeader className="font-bold bg-[#1f5156] text-[30px] text-white">
+    <Sidebar {...props}>
+      {isSheetOpen && (
+        <div
+          className="absolute inset-0 z-50 bg-transparent"
+          onClick={(e) => e.preventDefault()}
+        />
+      )}
+      <SidebarHeader className="font-bold text-[30px]  text-white">
         Camera User Manual
       </SidebarHeader>
       <SidebarContent className="gap-0 bg-[#1f5156]">
@@ -117,6 +124,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                               asChild
                               onClick={() => {
                                 setSelectedItem(subItem);
+                                setIsSheetOpen(true)
                                 const feature = new CustomEvent(
                                   "featureSelected",
                                   {
@@ -137,6 +145,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                           }
                           selectedItem={selectedItem}
                           onClose={handleSheetClose}
+                          setIsOpen={setIsSheetOpen}
                         />
                       </SidebarMenuItem>
                     ))}

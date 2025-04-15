@@ -19,29 +19,30 @@ interface SheetPopUpProps {
   } | null;
   sliderComponent?: React.ReactNode;
   onClose?: () => void;
+  setIsOpen: (open: boolean) => void;
 }
 
 export const SheetPopUp = ({
   trigger,
   selectedItem,
   onClose,
-  // sliderComponent,
+  sliderComponent,
+  setIsOpen,
 }: SheetPopUpProps) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [triggerElement, setTriggerElement] = useState<string | null>(null);
-    const [showMedia, setShowMedia] = useState(false);
-    const [mediaDirection, setMediaDirection] = useState<"Left" | "Right" | null>(null);
-    const [mediaChangeCounter, setMediaChangeCounter] = useState(0);
+  const [isOpenLocal, setIsOpenLocal] = useState(false);
+  const [triggerElement, setTriggerElement] = useState<string | null>(null);
+  const [showMedia, setShowMedia] = useState(false);
+  const [mediaDirection, setMediaDirection] = useState<"Left" | "Right" | null>(null);
+  const [mediaChangeCounter, setMediaChangeCounter] = useState(0);
 
-    useEffect(() => {
-      const handleCustomEvent = (event: Event) => {
-        const customEvent = event as CustomEvent;
-        console.log(event)
-        switch (event.type) {
-          case 'ZOOMDemo':
-            setTriggerElement("ZOOMDemo");
-            //setIsOpen(true);
-            break;
+  useEffect(() => {
+    const handleCustomEvent = (event: Event) => {
+      const customEvent = event as CustomEvent;
+      console.log(event)
+      switch (event.type) {
+        case 'ZOOMDemo':
+          setTriggerElement("ZOOMDemo");
+          break;
 
           case 'ShowMedia':
             setShowMedia(!showMedia);
@@ -80,15 +81,17 @@ export const SheetPopUp = ({
       };
     }, [mediaChangeCounter]);
 
-    const handleOpenChange = (open: boolean) => {
-      setIsOpen(open);
-      if (!open) {
-        onClose?.();
-        setTriggerElement(null);
-        setShowMedia(false);
-        setMediaDirection(null);
-      }
-    };
+  const handleOpenChange = (open: boolean) => {
+    setIsOpenLocal(open);
+    setIsOpen(open);
+    console.log(open)
+    if (!open) {
+      setTriggerElement(null);
+      setShowMedia(false);
+      setMediaDirection(null);
+      onClose?.();
+    }
+  };
 
     const renderContentBasedOnTrigger = () => {
       switch (triggerElement) {
@@ -112,7 +115,7 @@ export const SheetPopUp = ({
     };
 
   return (
-    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
+    <Sheet open={isOpenLocal} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent side="right" className="w-[400px] sm:w-[540px]">
         <SheetHeader>

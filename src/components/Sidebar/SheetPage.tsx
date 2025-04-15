@@ -18,8 +18,7 @@ export function SheetPage() {
       <SheetTrigger asChild>
         <Button variant="outline">Open</Button>
       </SheetTrigger>
-      <SheetContent style={{ '--sidebar-border': 'transparent' } as React.CSSProperties}
-  className="border-none">
+      <SheetContent>
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>
           <SheetDescription>
