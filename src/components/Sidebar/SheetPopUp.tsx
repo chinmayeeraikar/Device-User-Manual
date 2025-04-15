@@ -38,6 +38,7 @@ export const SheetPopUp = ({
   useEffect(() => {
     const handleCustomEvent = (event: Event) => {
       const customEvent = event as CustomEvent;
+      console.log(event)
       switch (event.type) {
         case "ZOOMDemo":
           setTriggerElement("ZOOMDemo");
@@ -74,7 +75,7 @@ export const SheetPopUp = ({
     setIsOpenLocal(open);
     setIsOpen(open); // Sync with AppSidebar
     if (!open) {
-      onClose?.();
+      //onClose?.();
       setTriggerElement(null);
       setShowMedia(false);
       setMediaDirection(null);
@@ -94,6 +95,9 @@ export const SheetPopUp = ({
           />
         );
       default:
+        if(triggerElement == 'ZOOMDemo'){
+          return <p>Video will appear.</p>;
+        }
         return <p>No dynamic content to show.</p>;
     }
   };
@@ -106,7 +110,7 @@ export const SheetPopUp = ({
           <SheetTitle className="text-2xl font-bold">
             {selectedItem?.title}
           </SheetTitle>
-          <SheetDescription className="pt-4">
+          <SheetDescription className="pt-4 text-black-400 text-[20px]">
             {selectedItem?.desc}
           </SheetDescription>
         </SheetHeader>
