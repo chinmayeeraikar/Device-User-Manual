@@ -36,6 +36,7 @@ export const SheetPopUp = ({
   useEffect(() => {
     const handleCustomEvent = (event: Event) => {
       const customEvent = event as CustomEvent;
+      console.log(event)
       switch (event.type) {
         case 'ZOOMDemo':
           setTriggerElement("ZOOMDemo");
@@ -82,7 +83,7 @@ export const SheetPopUp = ({
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
     if (!open) {
-      onClose?.();
+      //onClose?.();
       setTriggerElement(null);
       setShowMedia(false);
       setMediaDirection(null);
