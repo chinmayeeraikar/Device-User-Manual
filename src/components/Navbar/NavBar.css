@@ -3,7 +3,7 @@
   height: 80px;
   display: flex;
   /* Remove fixed width and left positioning */
-  width: fit-content;
+  width: 100%;
   min-width: min-content;
   margin: 0 auto; /* Center the navbar */
   justify-content: center;
