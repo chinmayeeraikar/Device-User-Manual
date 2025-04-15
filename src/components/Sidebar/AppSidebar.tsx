@@ -18,7 +18,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import SheetPopUp from "./SheetPopUp"; // Import the SheetPopUp component
+import SheetPopUp from "./SheetPopUp";
 
 interface SidebarItem {
   title: string;
@@ -27,7 +27,6 @@ interface SidebarItem {
   source: string;
 }
 
-// Sample data
 export const data = {
   navMain: [
     {
@@ -38,15 +37,13 @@ export const data = {
           title: "Zoom",
           url: "#",
           desc: "To zoom in and out of view, rotate the rotary control to zoom. You can view demo by Dragging mouse on screen.",
-          source:
-            "../../../assets/V1.mp4.mov",
+          source: "../../../assets/V1.mp4.mov",
         },
         {
           title: "Media",
           url: "#",
           desc: "To view media, press button on bottom left (▶️). To navigate through the gallery, press the side keys.",
-          source:
-            "../../../assets/V1.mp4.mov",
+          source: "../../../assets/V1.mp4.mov",
         },
       ],
     },
@@ -59,31 +56,26 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     desc: string;
     source: string;
   } | null>(null);
-
-  const handleItemSelect = () => {
-    setSelectedItem({
-      title: "Sample Video",
-      desc: "This is a description of the video",
-      source: "/path/to/your/video.mp4",
-    });
-  };
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const handleSheetClose = () => {
-    console.log("Sheet was closed, performing cleanup...");
-    const feature = new CustomEvent(
-      "popupclose",
-      {
-        detail: 'View',
-      }
-    );
-    console.log("CloseDispatched")
+    const feature = new CustomEvent("popupclose", { detail: "View" });
     window.dispatchEvent(feature);
     setSelectedItem(null);
+    setIsSheetOpen(false);
   };
 
   return (
-    <Sidebar {...props}>
-      <SidebarHeader className="font-bold text-[30px]  text-white">
+    <Sidebar {...props} className="relative">
+      {/* Overlay to block interactions when sheet is open */}
+      {isSheetOpen && (
+        <div
+          className="absolute inset-0 z-50 bg-transparent"
+          onClick={(e) => e.preventDefault()}
+        />
+      )}
+
+      <SidebarHeader className="font-bold text-[30px] text-white">
         Camera User Manual
       </SidebarHeader>
       <SidebarContent className="gap-0">
@@ -115,11 +107,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                               asChild
                               onClick={() => {
                                 setSelectedItem(subItem);
+                                setIsSheetOpen(true);
                                 const feature = new CustomEvent(
                                   "featureSelected",
-                                  {
-                                    detail: subItem,
-                                  }
+                                  { detail: subItem }
                                 );
                                 window.dispatchEvent(feature);
                               }}
@@ -134,6 +125,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                           }
                           selectedItem={selectedItem}
                           onClose={handleSheetClose}
+                          setIsOpen={setIsSheetOpen}
                         />
                       </SidebarMenuItem>
                     ))}
