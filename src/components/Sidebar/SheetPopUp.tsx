@@ -25,91 +25,91 @@ export const SheetPopUp = ({
   trigger,
   selectedItem,
   onClose,
-  sliderComponent,
+  // sliderComponent,
 }: SheetPopUpProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [triggerElement, setTriggerElement] = useState<string | null>(null);
-  const [showMedia, setShowMedia] = useState(false);
-  const [mediaDirection, setMediaDirection] = useState<"Left" | "Right" | null>(null);
-  const [mediaChangeCounter, setMediaChangeCounter] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
+    const [triggerElement, setTriggerElement] = useState<string | null>(null);
+    const [showMedia, setShowMedia] = useState(false);
+    const [mediaDirection, setMediaDirection] = useState<"Left" | "Right" | null>(null);
+    const [mediaChangeCounter, setMediaChangeCounter] = useState(0);
 
-  useEffect(() => {
-    const handleCustomEvent = (event: Event) => {
-      const customEvent = event as CustomEvent;
-      console.log(event)
-      switch (event.type) {
-        case 'ZOOMDemo':
-          setTriggerElement("ZOOMDemo");
-          //setIsOpen(true);
-          break;
+    useEffect(() => {
+      const handleCustomEvent = (event: Event) => {
+        const customEvent = event as CustomEvent;
+        console.log(event)
+        switch (event.type) {
+          case 'ZOOMDemo':
+            setTriggerElement("ZOOMDemo");
+            //setIsOpen(true);
+            break;
 
-        case 'ShowMedia':
-          setShowMedia(!showMedia);
-          console.log(showMedia)
-          setTriggerElement("ChangeMedia"); 
-          if(!showMedia){
-            setMediaDirection(null);
-          }
-          else{
-            setMediaDirection("Right");
-          }
-          break;
+          case 'ShowMedia':
+            setShowMedia(!showMedia);
+            console.log(showMedia)
+            setTriggerElement("ChangeMedia"); 
+            if(!showMedia){
+              setMediaDirection(null);
+            }
+            else{
+              setMediaDirection("Right");
+            }
+            break;
 
-        case 'ChangeMedia':
-          if (customEvent.detail === "Left" || customEvent.detail === "Right") {
-            setMediaDirection(customEvent.detail); // Pass direction to gallery
-            setTriggerElement("ChangeMedia");
-            setMediaChangeCounter(prev => prev + 1);
-            console.log(mediaDirection)
-          }
-          break;
+          case 'ChangeMedia':
+            if (customEvent.detail === "Left" || customEvent.detail === "Right") {
+              setMediaDirection(customEvent.detail); // Pass direction to gallery
+              setTriggerElement("ChangeMedia");
+              setMediaChangeCounter(prev => prev + 1);
+              console.log(mediaDirection)
+            }
+            break;
 
-        default:
-          break;
+          default:
+            break;
+        }
+      };
+
+      window.addEventListener('ZOOMDemo', handleCustomEvent);
+      window.addEventListener('ShowMedia', handleCustomEvent);
+      window.addEventListener('ChangeMedia', handleCustomEvent);
+
+      return () => {
+        window.removeEventListener('ZOOMDemo', handleCustomEvent);
+        window.removeEventListener('ShowMedia', handleCustomEvent);
+        window.removeEventListener('ChangeMedia', handleCustomEvent);
+      };
+    }, [mediaChangeCounter]);
+
+    const handleOpenChange = (open: boolean) => {
+      setIsOpen(open);
+      if (!open) {
+        onClose?.();
+        setTriggerElement(null);
+        setShowMedia(false);
+        setMediaDirection(null);
       }
     };
 
-    window.addEventListener('ZOOMDemo', handleCustomEvent);
-    window.addEventListener('ShowMedia', handleCustomEvent);
-    window.addEventListener('ChangeMedia', handleCustomEvent);
-
-    return () => {
-      window.removeEventListener('ZOOMDemo', handleCustomEvent);
-      window.removeEventListener('ShowMedia', handleCustomEvent);
-      window.removeEventListener('ChangeMedia', handleCustomEvent);
+    const renderContentBasedOnTrigger = () => {
+      switch (triggerElement) {
+        case "ZOOMDemo":
+          return <ZoomLiveAction />;
+        case "ChangeMedia":
+          console.log("ChangeMedia:", mediaDirection)
+          return (
+            <MediaGallery
+              showMedia={showMedia}
+              mediaDirection={mediaDirection}
+              changeCounter={mediaChangeCounter}
+            />
+          );
+        default:
+          if(triggerElement == 'ZOOMDemo'){
+            return <p>Video will appear.</p>;
+          }
+          return <p>No dynamic content to show.</p>;
+      }
     };
-  }, [mediaChangeCounter]);
-
-  const handleOpenChange = (open: boolean) => {
-    setIsOpen(open);
-    if (!open) {
-      onClose?.();
-      setTriggerElement(null);
-      setShowMedia(false);
-      setMediaDirection(null);
-    }
-  };
-
-  const renderContentBasedOnTrigger = () => {
-    switch (triggerElement) {
-      case "ZOOMDemo":
-        return <ZoomLiveAction />;
-      case "ChangeMedia":
-        console.log("ChangeMedia:", mediaDirection)
-        return (
-          <MediaGallery
-            showMedia={showMedia}
-            mediaDirection={mediaDirection}
-            changeCounter={mediaChangeCounter}
-          />
-        );
-      default:
-        if(triggerElement == 'ZOOMDemo'){
-          return <p>Video will appear.</p>;
-        }
-        return <p>No dynamic content to show.</p>;
-    }
-  };
 
   return (
     <Sheet open={isOpen} onOpenChange={handleOpenChange}>
