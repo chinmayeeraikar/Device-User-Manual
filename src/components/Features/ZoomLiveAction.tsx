@@ -19,8 +19,6 @@ const ZoomLiveAction = () => {
     };
   }, []);
 
-  // More dramatic scale calculation - zoomAmount of 100 will be scale 2 (double size)
-  // const scale = 1 + (zamt / 100);
   const scale = 1 + (zoomAmount / 100);
 
   return (
