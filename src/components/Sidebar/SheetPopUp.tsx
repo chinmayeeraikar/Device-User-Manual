@@ -43,9 +43,9 @@ export const SheetPopUp = ({
           break;
 
         case 'ShowMedia':
-          setShowMedia(!showMedia); // Display carousel
+          setShowMedia(!showMedia);
           console.log(showMedia)
-          setTriggerElement("ChangeMedia"); // So gallery renders
+          setTriggerElement("ChangeMedia"); 
           if(!showMedia){
             setMediaDirection(null);
           }
@@ -103,6 +103,9 @@ export const SheetPopUp = ({
           />
         );
       default:
+        if(triggerElement == 'ZOOMDemo'){
+          return <p>Video will appear.</p>;
+        }
         return <p>No dynamic content to show.</p>;
     }
   };
@@ -115,7 +118,7 @@ export const SheetPopUp = ({
           <SheetTitle className="text-2xl font-bold">
             {selectedItem?.title}
           </SheetTitle>
-          <SheetDescription className="pt-4">
+          <SheetDescription className="pt-4 text-black-400 text-[20px]">
             {selectedItem?.desc}
           </SheetDescription>
         </SheetHeader>
