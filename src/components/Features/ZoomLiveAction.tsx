@@ -8,8 +8,7 @@ const ZoomLiveAction = () => {
   
   useEffect(() => {
     const handleLiveZoom = (event) => {
-      console.log("Zoom event received with value:", event.detail);
-      //zamt=event.detail
+      //console.log("Zoom event received with value:", event.detail);
       setZoomAmount(event.detail*100);
     };
 
@@ -20,8 +19,6 @@ const ZoomLiveAction = () => {
     };
   }, []);
 
-  // More dramatic scale calculation - zoomAmount of 100 will be scale 2 (double size)
-  // const scale = 1 + (zamt / 100);
   const scale = 1 + (zoomAmount / 100);
 
   return (

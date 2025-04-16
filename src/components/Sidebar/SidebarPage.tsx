@@ -18,8 +18,8 @@ import { SheetPage } from "./SheetPage"
 export default function SidebarPage() {
   return (
     <>
-    <SidebarProvider className="bg-red">
-      <AppSidebar/>
+    <SidebarProvider className="bg-[#1f5156]">
+      <AppSidebar />
       <SidebarTrigger className="-ml-1" />
     </SidebarProvider>
     <SheetPage />

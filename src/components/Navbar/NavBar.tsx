@@ -8,7 +8,8 @@ const NavBar: React.FC = () => {
   const handleClick = () => setClick(!click);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar border-none"
+    style={{ '--border': '0' } as React.CSSProperties}>
       <div className="nav-container">
         <ul className={click ? "nav-menu active" : "nav-menu"}>
           <li className="nav-item">
