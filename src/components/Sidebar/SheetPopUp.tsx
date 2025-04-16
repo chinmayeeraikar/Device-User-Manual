@@ -7,7 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import ZoomLiveAction from "../Features/ZoomLiveAction"
+import ZoomLiveAction from "../Features/ZoomLiveAction";
 import MediaGallery from "../Features/MediaGallery";
 
 interface SheetPopUpProps {
@@ -40,7 +40,7 @@ export const SheetPopUp = ({
       const customEvent = event as CustomEvent;
       console.log(event)
       switch (event.type) {
-        case 'ZOOMDemo':
+        case "ZOOMDemo":
           setTriggerElement("ZOOMDemo");
           break;
 

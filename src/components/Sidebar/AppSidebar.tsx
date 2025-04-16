@@ -82,6 +82,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     window.dispatchEvent(feature);
     setIsSheetOpen(false);
     setSelectedItem(null);
+    setIsSheetOpen(false);
   };
 
   return (
@@ -127,9 +128,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 setIsSheetOpen(true)
                                 const feature = new CustomEvent(
                                   "featureSelected",
-                                  {
-                                    detail: subItem,
-                                  }
+                                  { detail: subItem }
                                 );
                                 window.dispatchEvent(feature);
                               }}
