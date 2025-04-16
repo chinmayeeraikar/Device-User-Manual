@@ -45,7 +45,7 @@ export const SheetPopUp = ({
           break;
 
         case 'ShowMedia':
-          setShowMedia(!showMedia);
+          setShowMedia(showMedia => !showMedia);
           console.log(showMedia);
           setTriggerElement("ChangeMedia"); 
           if(!showMedia){
