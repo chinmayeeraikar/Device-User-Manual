@@ -46,7 +46,7 @@ export const SheetPopUp = ({
 
           case 'ShowMedia':
             setShowMedia(!showMedia);
-            console.log(showMedia)
+            console.log(showMedia);
             setTriggerElement("ChangeMedia"); 
             if(!showMedia){
               setMediaDirection(null);
@@ -84,7 +84,6 @@ export const SheetPopUp = ({
   const handleOpenChange = (open: boolean) => {
     setIsOpenLocal(open);
     setIsOpen(open);
-    console.log(open)
     if (!open) {
       setTriggerElement(null);
       setShowMedia(false);
@@ -107,9 +106,6 @@ export const SheetPopUp = ({
             />
           );
         default:
-          if(triggerElement == 'ZOOMDemo'){
-            return <p>Video will appear.</p>;
-          }
           return <p>No dynamic content to show.</p>;
       }
     };
@@ -117,10 +113,10 @@ export const SheetPopUp = ({
   return (
     <Sheet open={isOpenLocal} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
-      <SheetContent side="right" className="w-[400px] sm:w-[540px]" style={{
+      <SheetContent side="right" className="w-[400px] sm:w-[540px]"style={{
     top: '80px', // This accounts for the navbar height
-    height: 'calc(100vh - 80px)' // This makes the sheet fill remaining viewport height
-  }}>
+    height: 'calc(100vh - 80px)' // This makes the sheet fill remaining viewport height
+  }}>
         <SheetHeader>
           <SheetTitle className="text-2xl font-bold">
             {selectedItem?.title}
