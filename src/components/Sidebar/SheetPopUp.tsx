@@ -44,26 +44,26 @@ export const SheetPopUp = ({
           setTriggerElement("ZOOMDemo");
           break;
 
-          case 'ShowMedia':
-            setShowMedia(!showMedia);
-            console.log(showMedia);
-            setTriggerElement("ChangeMedia"); 
-            if(!showMedia){
-              setMediaDirection(null);
-            }
-            else{
-              setMediaDirection("Right");
-            }
-            break;
+        case 'ShowMedia':
+          setShowMedia(!showMedia);
+          console.log(showMedia);
+          setTriggerElement("ChangeMedia"); 
+          if(!showMedia){
+            setMediaDirection(null);
+          }
+          else{
+            setMediaDirection("Right");
+          }
+          break;
 
-          case 'ChangeMedia':
-            if (customEvent.detail === "Left" || customEvent.detail === "Right") {
-              setMediaDirection(customEvent.detail); // Pass direction to gallery
-              setTriggerElement("ChangeMedia");
-              setMediaChangeCounter(prev => prev + 1);
-              console.log(mediaDirection)
-            }
-            break;
+        case 'ChangeMedia':
+          if (customEvent.detail === "Left" || customEvent.detail === "Right") {
+            setMediaDirection(customEvent.detail); // Pass direction to gallery
+            setTriggerElement("ChangeMedia");
+            setMediaChangeCounter(prev => prev + 1);
+            console.log(mediaDirection)
+          }
+          break;
 
           default:
             break;
@@ -85,7 +85,7 @@ export const SheetPopUp = ({
     setIsOpenLocal(open);
     setIsOpen(open);
     if (!open) {
-      setTriggerElement(null);
+      setTriggerElement("View");
       setShowMedia(false);
       setMediaDirection(null);
       onClose?.();
@@ -105,6 +105,12 @@ export const SheetPopUp = ({
               changeCounter={mediaChangeCounter}
             />
           );
+
+        case "View":
+          console.log(triggerElement)
+          console.log("vIew")
+          break; 
+          
         default:
           return <p>No dynamic content to show.</p>;
       }

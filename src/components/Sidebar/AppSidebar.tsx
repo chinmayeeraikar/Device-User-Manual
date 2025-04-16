@@ -92,10 +92,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           onClick={(e) => e.preventDefault()}
         />
       )}
-      <SidebarHeader className="font-bold text-[30px]  text-white">
+      <SidebarHeader className="font-bold text-[30px] bg-[#1f5156] !p-3 text-white">
         Camera User Manual
       </SidebarHeader>
-      <SidebarContent className="gap-0 bg-[#1f5156]">
+      <SidebarContent className="gap-0 !p-3 bg-[#1f5156]">
         {data.navMain.map((item) => (
           <Collapsible
             key={item.title}
@@ -115,7 +115,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </SidebarGroupLabel>
               <CollapsibleContent>
                 <SidebarGroupContent>
-                  <SidebarMenu className="text-white-100">
+                  <SidebarMenu className="text-white-100 !p-3">
                     {item.items.map((subItem) => (
                       <SidebarMenuItem key={subItem.title}>
                         <SheetPopUp
