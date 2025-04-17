@@ -149,6 +149,7 @@ export const Contact = () => {
       imageUrl: "/api/placeholder/400/400",
       initials: "RS",
       role: "Team Member",
+      ln: "https://www.linkedin.com/in/rewa-shete-60a933286/",
     },
     {
       name: "Chinmayee Raikar",
@@ -156,6 +157,7 @@ export const Contact = () => {
       imageUrl: "/api/placeholder/400/400",
       initials: "CR",
       role: "Team Member",
+      ln: "https://www.linkedin.com/in/chinmayee-raikar-832700289/",
     },
     {
       name: "Tanvi Yeola",
@@ -163,6 +165,7 @@ export const Contact = () => {
       imageUrl: "/api/placeholder/400/400",
       initials: "TY",
       role: "Team Member",
+      ln: "",
     },
     {
       name: "Sanika Surange",
@@ -170,6 +173,7 @@ export const Contact = () => {
       imageUrl: "/api/placeholder/400/400",
       initials: "SS",
       role: "Team Member",
+      ln: "https://www.linkedin.com/in/sanika-surange-272252345/",
     },
   ];
 
@@ -214,8 +218,8 @@ export const Contact = () => {
 
               <CardFooter className="flex justify-center gap-3 pb-6">
                 <a
-                  href="#"
-                  className="rounded-full p-2 bg-yellow-200 hover:bg-yellow-300 transition-colors"
+                  href={member.ln}
+                  className="rounded-full p-2 hover:bg-yellow-300 transition-colors"
                   aria-label="LinkedIn"
                 >
                   <svg
@@ -228,7 +232,7 @@ export const Contact = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-yellow-800"
+                    // className="text-yellow-800"
                   >
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                     <rect x="2" y="9" width="4" height="12"></rect>

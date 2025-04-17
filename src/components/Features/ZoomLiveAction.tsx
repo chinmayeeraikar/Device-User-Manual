@@ -39,8 +39,7 @@ const ZoomLiveAction = () => {
         <video 
           ref={videoRef}
           width="100%" 
-          height="auto" 
-          controls 
+          height="auto"  
           autoPlay 
           muted
           style={{
