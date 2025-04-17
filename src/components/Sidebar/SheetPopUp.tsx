@@ -26,7 +26,6 @@ export const SheetPopUp = ({
   trigger,
   selectedItem,
   onClose,
-  sliderComponent,
   setIsOpen,
 }: SheetPopUpProps) => {
   const [isOpenLocal, setIsOpenLocal] = useState(false);
